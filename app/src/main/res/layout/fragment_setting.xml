@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#252525">
+
+    <include layout="@layout/main_toolbar"/>
+
+    <ImageView
+        android:id="@+id/profile_image_view"
+        android:layout_width="149dp"
+        android:layout_height="141dp"
+        android:background="@drawable/circular_profile_pic"
+        android:contentDescription="Profile image"
+        android:src="@drawable/basic_profile_pic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.139" />
+
+
+    <TextView
+        android:id="@+id/name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="44dp"
+        android:text="Name"
+        android:textColor="#F4F0F0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/education_header_text_view" />
+
+
+    <TextView
+        android:id="@+id/bio_text_view"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:text="Bio"
+        android:textColor="#EAE4E4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/skills_header_text_view" />
+
+    <TextView
+        android:id="@+id/skills_header_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Skills"
+        android:textColor="#F4EFEF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
+
+    <TextView
+        android:id="@+id/education_header_text_view"
+        android:layout_width="252dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="40dp"
+        android:text="u2000000@siswa.um.edu.my"
+        android:textColor="#FAF8F8"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image_view" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
