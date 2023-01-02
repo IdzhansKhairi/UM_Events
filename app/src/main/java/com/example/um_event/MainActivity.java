@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //method to change fragment based on the buttons user tap
     private void replaceFragment(Fragment fragment) {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
