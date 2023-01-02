@@ -9,61 +9,53 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.um_event.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Remove the title bar
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide(); //hide the bar
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
 
-        //set navigation listener for bottom navigation
-        BottomNavigationView BtmNav = findViewById(R.id.bottom_navigation_box);
-        BtmNav.setOnNavigationItemSelectedListener(navListener);
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
-        //set the first page when app is running
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            // We wanted when the users tap, it will replace it with its particular fragment
+            switch (item.getItemId()) {
 
-try {
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-}catch (Exception e){
-    e.printStackTrace();
-}
+                case R.id.nav_home:
+                    replaceFragment(new HomeFragment());
+                    break;
+                case R.id.nav_search:
+                    replaceFragment(new SearchFragment());
+                    break;
+                case R.id.nav_calendar:
+                    replaceFragment(new CalendarFragment());
+                    break;
+                case R.id.nav_setting:
+                    replaceFragment(new SettingsFragment());
+                    break;
+            }
+
+            return true;
+        });
 
     }
 
+    private void replaceFragment(Fragment fragment) {
 
-    //handle the navigation listener for bottom navigation
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
-            switch (item.getItemId()){
-                case R.id.nav_setting:
-                    selectedFragment = new SettingFragment();
-                    break;
-                case R.id.nav_search:
-                    selectedFragment = new SearchFragment();
-                    break;
-                case R.id.nav_home:
-                    selectedFragment = new HomeFragment();
-                    break;
-                case R.id.nav_calendar:
-                    selectedFragment = new CalendarFragment();
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value" );
-            }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
-            return true ;
-        }
-    };
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.Frame_Layout, fragment);
+        fragmentTransaction.commit();
+    }
+
 }
