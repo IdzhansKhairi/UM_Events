@@ -135,39 +135,46 @@
                 android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/sportCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Sports"/>
+                android:text="Sports" />
 
             <CheckBox
+                android:id="@+id/carnivalCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Carnival"/>
+                android:text="Carnival" />
 
             <CheckBox
+                android:id="@+id/talkCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Talks"/>
+                android:text="Talks" />
 
             <CheckBox
+                android:id="@+id/artCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Arts"/>
+                android:text="Arts" />
 
             <CheckBox
+                android:id="@+id/webinarCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Webminar"/>
+                android:text="Webinar" />
 
             <CheckBox
+                android:id="@+id/showcaseCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Showcase"/>
+                android:text="Showcase" />
 
             <CheckBox
+                android:id="@+id/educationalCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Educational"/>
+                android:text="Educational" />
 
             <Button
                 android:id="@+id/creatingAccountButton"
