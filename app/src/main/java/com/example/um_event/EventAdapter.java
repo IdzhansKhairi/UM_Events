@@ -16,14 +16,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     //This part fetch the data from the xml file
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView movieImage;
-        TextView textViewName;
-        TextView textViewDetail;
+        TextView TVName, TVDetail;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             movieImage = itemView.findViewById(R.id.CVImage);
-            textViewName = itemView.findViewById(R.id.CVName);
-            textViewDetail = itemView.findViewById(R.id.CVDetail);
+            TVName = itemView.findViewById(R.id.CVName);
+            TVDetail = itemView.findViewById(R.id.CVDetail);
 
         }
     }
@@ -48,14 +48,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final EventData myEventDataList = myEventData[position];
-        holder.textViewName.setText(myEventDataList.getEventName());
-        holder.textViewDetail.setText(myEventDataList.getEventDate());
+        holder.TVName.setText(myEventDataList.getEventName());
+        holder.TVDetail.setText(myEventDataList.getEventDate());
        // holder.movieImage.setImageResource(myEventDataList.getEventImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, myEventDataList.getEventName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"YOu clicked RIck Roll!!!" , Toast.LENGTH_SHORT).show();
 
             }
         });

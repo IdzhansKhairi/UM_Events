@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:background="#252525"
+    android:layout_marginTop="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:textColorHint="#555555"
+                android:textColor="@color/white"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/ETEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Name" />
+
+            <EditText
+                android:id="@+id/ETEventVenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Event Venue"
+                android:textColor="@color/white"
+                android:gravity="top|left"
+                android:textColorHint="#555555" />
+
+            <EditText
+                android:id="@+id/ETEventDetail"
+                android:layout_width="match_parent"
+                android:layout_height="129dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Event Details"
+                android:inputType="textMultiLine"
+                android:textColor="@color/white"
+                android:gravity="top|left"
+                android:textColorHint="#555555" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="top|left">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:text="Sport"
+                            android:layout_marginRight="20dp"
+                            android:textColor="@color/white"
+                            android:id="@+id/RBSport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                        <RadioButton
+                            android:text="Carnival"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/RBCarnival"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                        <RadioButton
+                            android:text="Talk"
+                            android:id="@+id/RBTalk"
+                            android:layout_marginRight="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                        <RadioButton
+                            android:text="Art"
+                            android:id="@+id/RBArt"
+                            android:layout_marginRight="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:text="Webinar"
+                            android:id="@+id/RBWebinar"
+                            android:layout_marginRight="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                        <RadioButton
+                            android:text="Showcase"
+                            android:id="@+id/RBShowcase"
+                            android:layout_marginRight="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                        <RadioButton
+                            android:text="Educational"
+                            android:id="@+id/RBEducational"
+                            android:layout_marginRight="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#555555"
+                android:calendarTextColor="#111111"
+                android:headerBackground="#333333"
+                android:yearListSelectorColor="#222222" />
+
+            <TimePicker
+                android:id="@+id/timePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:amPmBackgroundColor="#FFFFFF"
+                android:background="#555555"
+                android:timePickerMode="spinner" />
+
+            <Button
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/InserEventBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/octaverseImg"
+                android:src="@drawable/octaverse"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+

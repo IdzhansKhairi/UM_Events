@@ -66,16 +66,16 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        EventData[] myEventData = new EventData[]{
-                new EventData("black Panther","12 jan","12PM",
-                        "Kuala Lumpur","Testing","Showcase"),
-                new EventData("Avenger","12 jan","12PM",
-                        "Kuala Lumpur","Testing","Showcase"),
-                new EventData("Avatar","12 jan","12PM",
-                        "Kuala Lumpur","Testing","Showcase")
-        };
-        EventAdapter myEventAdapter = new EventAdapter(myEventData);
-        recyclerView.setAdapter(myEventAdapter);
+//        EventData[] myEventData = new EventData[]{
+//                new EventData("black Panther","12 jan","12PM",
+//                        "Kuala Lumpur","Testing","Showcase"),
+//                new EventData("Avenger","12 jan","12PM",
+//                        "Kuala Lumpur","Testing","Showcase"),
+//                new EventData("Avatar","12 jan","12PM",
+//                        "Kuala Lumpur","Testing","Showcase")
+//        };
+//        EventAdapter myEventAdapter = new EventAdapter(myEventData);
+//        recyclerView.setAdapter(myEventAdapter);
         return v;
     }
 }

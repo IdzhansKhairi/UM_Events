@@ -12,15 +12,15 @@ public class EventData {
     private String EventCategory;
     private Integer EventImage;
 
-    public EventData(String eventName, String eventDate, String eventTime, String eventVenue, String eventDetail,
-                     String eventCategory) {
+    public EventData(String eventName, String eventVenue, String eventDetail, String eventCategory, String eventDate, String eventTime,
+                     Integer eventImage) {
         this.EventName = eventName;
         this.EventDate = eventDate;
         this.EventTime = eventTime;
         this.EventVenue = eventVenue;
         this.EventDetail = eventDetail;
         this.EventCategory = eventCategory;
-      //  this.EventImage = eventImage;
+        this.EventImage = eventImage;
     }
 
     public Integer getEventImage() {

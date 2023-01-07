@@ -64,13 +64,13 @@ public class RegisterActivity extends AppCompatActivity {
     public void Check(View v) {
 
         if(sportsCheck.isChecked())
-            checks += "Sports ";
+            checks += "Sport ";
         if(carnivalCheck.isChecked())
             checks += "Carnival ";
         if(talksCheck.isChecked())
-            checks += "Talks ";
+            checks += "Talk ";
         if(artsCheck.isChecked())
-            checks += "Arts ";
+            checks += "Art ";
         if(webminarCheck.isChecked())
             checks += "Webinar ";
         if(showcaseCheck.isChecked())
