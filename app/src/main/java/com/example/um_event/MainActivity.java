@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new CalendarFragment());
                     break;
                 case R.id.nav_setting:
-                    replaceFragment(new SettingsFragment());
+                    replaceFragment(new Test_appearance());
+                   // replaceFragment(new SettingsFragment());
                     break;
             }
 
