@@ -1,20 +1,20 @@
 package com.example.um_event;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link SingleEventViewOrganizerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
+public class SingleEventViewOrganizerFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +25,7 @@ public class SearchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SearchFragment() {
+    public SingleEventViewOrganizerFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +35,11 @@ public class SearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
+     * @return A new instance of fragment SingleEventViewOrganizerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
+    public static SingleEventViewOrganizerFragment newInstance(String param1, String param2) {
+        SingleEventViewOrganizerFragment fragment = new SingleEventViewOrganizerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,23 +59,13 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_search, container, false);
-
-        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-//        EventData[] myEventData = new EventData[]{
-//                new EventData("black Panther","12 jan","12PM",
-//                        "Kuala Lumpur","Testing","Showcase"),
-//                new EventData("Avenger","12 jan","12PM",
-//                        "Kuala Lumpur","Testing","Showcase"),
-//                new EventData("Avatar","12 jan","12PM",
-//                        "Kuala Lumpur","Testing","Showcase")
-//        };
-//        EventAdapter myEventAdapter = new EventAdapter(myEventData);
-//        recyclerView.setAdapter(myEventAdapter);
-        return v;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_single_event_view_organizer, container, false);
     }
+    public void gotosearchpage(View view) {
+        // code to go to another page
+
+
+    }
+
 }

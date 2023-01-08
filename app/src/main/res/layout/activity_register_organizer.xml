@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterOrganizerActivity">
 
     <ImageButton
         android:id="@+id/backRegisterImageButton"
@@ -51,24 +51,59 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--Personal Information Related-->
+            <TextView
+                android:id="@+id/PersonalInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Organizer Information"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/registerName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="Organizer Name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"/>
+
+            <EditText
+                android:id="@+id/registerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"/>
+
+            <EditText
+                android:id="@+id/registerPhone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="Organizer Phone Number"
+                android:inputType="phone"
+                android:minHeight="48dp"/>
+
+            <TextView
+                android:id="@+id/phoneMustWhatForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="(Fill your phone number in 0123456789 form)"
+                android:textSize="13dp"
+                android:textColor="#000000"/>
+
             <!--Account Information Related-->
             <TextView
                 android:id="@+id/AccountInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:text="Account Information"
                 android:textSize="25sp"
                 android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/registerMatricNumber"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:hint="Matric Number"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"/>
 
             <EditText
                 android:id="@+id/registerUsername"
@@ -97,68 +132,24 @@
                 android:inputType="textPassword"
                 android:minHeight="48dp"/>
 
-            <!--This part is for checkboxx-->
-            <TextView
-                android:id="@+id/DesiredEventsType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Desired Event Type"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/sportCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Sports" />
-
-            <CheckBox
-                android:id="@+id/carnivalCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Carnival" />
-
-            <CheckBox
-                android:id="@+id/talkCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Talks" />
-
-            <CheckBox
-                android:id="@+id/artsCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Arts" />
-
-            <CheckBox
-                android:id="@+id/webinarCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Webinar" />
-
-            <CheckBox
-                android:id="@+id/showcaseCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Showcase" />
-
-            <CheckBox
-                android:id="@+id/educationalCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Educational" />
-
             <Button
-                android:id="@+id/creatingAccountButton"
+                android:id="@+id/creatingOrganizerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Create New Account"
+                android:text="Create Organizer Account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.082"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Please note that all your registration information will be sent to the admin of this application. Your application will be considered depending on its suitability and also the rules of the University of Malaya."
+                android:textAlignment="center"
+                android:textColor="#FF0000" />
 
         </LinearLayout>
     </ScrollView>

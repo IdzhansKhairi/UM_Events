@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".SingleEventViewOrganizerFragment">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/tag_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:src="@drawable/blue_gradient_umtouch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVBackSEVO"
+        android:layout_width="61dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/kadwa"
+        android:text="Back"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="gotosearchpage"/>
+
+    <EditText
+        android:id="@+id/TVtitleSEVO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/kadwa"
+        android:text="Comic Fiesta 2022"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/TVBackSEVO"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/comicfiestapostercontainer"
+        android:layout_width="402dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" >>
+
+        <ImageView
+            android:id="@+id/comicfiestaposterSEVO"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/comic_fiesta" />
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/whiteline"
+        android:layout_width="385dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/line_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comicfiestapostercontainer" />
+
+    <EditText
+        android:id="@+id/descSEVO"
+        android:layout_width="410dp"
+        android:layout_height="112dp"
+        android:fontFamily="@font/kadwa"
+        android:text="@string/SEV2"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whiteline" />
+
+    <ImageView
+        android:id="@+id/whiteline3"
+        android:layout_width="385dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/line_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descSEVO" />
+
+    <ImageView
+        android:id="@+id/detail_bg"
+        android:layout_width="400dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/detail_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whiteline3" />
+
+    <ImageView
+        android:id="@+id/ic_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintStart_toStartOf="@+id/detail_bg"
+        app:layout_constraintTop_toTopOf="@+id/detail_bg" />
+
+    <EditText
+        android:id="@+id/TVdateSEVO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/kadwa"
+        android:text="@string/date"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ic_calendar"
+        app:layout_constraintTop_toTopOf="@+id/detail_bg" />
+
+    <ImageView
+        android:id="@+id/ic_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintStart_toStartOf="@+id/detail_bg"
+        app:layout_constraintTop_toBottomOf="@+id/ic_calendar" />
+
+    <EditText
+        android:id="@+id/TVlocationSEVO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="11dp"
+        android:fontFamily="@font/kadwa"
+        android:text="@string/location"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_bg"
+        app:layout_constraintStart_toEndOf="@+id/ic_location" />
+
+    <ImageView
+        android:id="@+id/ic_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_time"
+        app:layout_constraintStart_toEndOf="@+id/TVdateSEVO"
+        app:layout_constraintTop_toTopOf="@+id/detail_bg" />
+
+    <EditText
+        android:id="@+id/TVtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/kadwa"
+        android:text="@string/time"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ic_time"
+        app:layout_constraintTop_toTopOf="@+id/detail_bg" />
+
+    <ImageView
+        android:id="@+id/ic_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/ic_website"
+        app:layout_constraintStart_toEndOf="@+id/TVlocationSEVO"
+        app:layout_constraintTop_toTopOf="@+id/detail_bg" />
+
+    <EditText
+        android:id="@+id/TVwebsiteSEVO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/kadwa"
+        android:text="@string/website"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_bg"
+        app:layout_constraintStart_toEndOf="@+id/ic_website" />
+
+    <TextView
+        android:id="@+id/tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="@font/kadwa"
+        android:text="Tags:"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/tag_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/carnivalSEVO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/kadwa"
+        android:text="Carnival"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </EditText>
+
+    <EditText
+        android:id="@+id/showcase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/kadwa"
+        android:text="Showcase"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/BTeditevent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="EDIT EVENT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_bg">
+
+        <ImageView
+            android:id="@+id/mapSEVO"
+            android:layout_width="400dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/mapcomicfiesta" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="29dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
