@@ -64,19 +64,19 @@ public class RegisterActivity extends AppCompatActivity {
     public void Check(View v) {
 
         if(sportsCheck.isChecked())
-            checks = checks + "Sports ";
+            checks += "Sport ";
         if(carnivalCheck.isChecked())
-            checks = checks + "Carnival ";
+            checks += "Carnival ";
         if(talksCheck.isChecked())
-            checks = checks + "Talks ";
+            checks += "Talk ";
         if(artsCheck.isChecked())
-            checks = checks + "Arts ";
+            checks += "Art ";
         if(webminarCheck.isChecked())
-            checks = checks + "Webinar";
+            checks += "Webinar ";
         if(showcaseCheck.isChecked())
-            checks = checks + "Showcase ";
+            checks += "Showcase ";
         if(educationalCheck.isChecked())
-            checks = checks + "Educational ";
+            checks += "Educational";
 
     }
 

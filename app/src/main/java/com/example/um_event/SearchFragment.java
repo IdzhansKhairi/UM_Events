@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,7 +59,23 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View v = inflater.inflate(R.layout.fragment_search, container, false);
+
+        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+//        EventData[] myEventData = new EventData[]{
+//                new EventData("black Panther","12 jan","12PM",
+//                        "Kuala Lumpur","Testing","Showcase"),
+//                new EventData("Avenger","12 jan","12PM",
+//                        "Kuala Lumpur","Testing","Showcase"),
+//                new EventData("Avatar","12 jan","12PM",
+//                        "Kuala Lumpur","Testing","Showcase")
+//        };
+//        EventAdapter myEventAdapter = new EventAdapter(myEventData);
+//        recyclerView.setAdapter(myEventAdapter);
+        return v;
     }
 }
