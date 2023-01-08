@@ -1,63 +1,87 @@
 package com.example.um_event;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CalendarFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class CalendarFragment extends Fragment {
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import static com.example.um_event.CalendarUtils.daysInMonthArray;
+import static com.example.um_event.CalendarUtils.monthYearFromDate;
 
-    public CalendarFragment() {
-        // Required empty public constructor
+public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener{
+    private TextView monthYearText;
+    private RecyclerView calendarRecyclerView;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initWidgets();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CalendarUtils.selectedDate = LocalDate.now();
+        }
+        setMonthView();
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CalendarFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CalendarFragment newInstance(String param1, String param2) {
-        CalendarFragment fragment = new CalendarFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void setContentView(int activity_main) {
+    }
+
+    private void initWidgets()
+    {
+        calendarRecyclerView = calendarRecyclerView.findViewById();
+        monthYearText = monthYearText.findViewById();
+    }
+
+    private void setMonthView()
+    {
+        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
+
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+        calendarRecyclerView.setLayoutManager(layoutManager);
+        calendarRecyclerView.setAdapter(calendarAdapter);
+    }
+
+    public void previousMonthAction(View view)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
+        }
+        setMonthView();
+    }
+
+    public void nextMonthAction(View view)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
+        }
+        setMonthView();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onItemClick(int position, LocalDate date)
+    {
+        if(date != null)
+        {
+            CalendarUtils.selectedDate = date;
+            setMonthView();
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+    public void weeklyAction(View view)
+    {
+        startActivity(new Intent((this, CalendarAddEventActivity.class)) ;
     }
 }
