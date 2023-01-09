@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_setting:
                     //replaceFragment(new Test_appearance());
-                    //replaceFragment(new InsertEvent());
+                    replaceFragment(new InsertEvent());
                    // replaceFragment(new SettingsFragment());
                     break;
             }
