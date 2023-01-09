@@ -64,7 +64,7 @@ public class Test_appearance extends Fragment {
         }
     }
 
-    private EditText Name, Siswamail , MatricNumber;
+    private EditText Name, MatricNumber;
     private Button sbmtBtn;
     private ImageView getImage;
 
@@ -75,24 +75,21 @@ public class Test_appearance extends Fragment {
 
         sbmtBtn = v.findViewById(R.id.submitBtn);
         Name = v.findViewById(R.id.fullname_get);
-        Siswamail = v.findViewById(R.id.siswamail_get);
         MatricNumber = v.findViewById(R.id.matricNumber_get);
         getImage = v.findViewById(R.id.convertImg);
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-
         sbmtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 ////////////////////////////////////////////////////////
-                if(Name.getText().toString().isEmpty() || Siswamail.getText().toString().isEmpty() || MatricNumber.getText().toString().isEmpty()){
+                if(Name.getText().toString().isEmpty() || MatricNumber.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Please Fill All Blanks", Toast.LENGTH_LONG).show();
                 }else{
                     try {
-                        StudentData insertNew = new StudentData(Name.getText().toString(),MatricNumber.getText().toString(),
-                                Siswamail.getText().toString());
+                        StudentData insertNew = new StudentData(Name.getText().toString(),unifyMatricNo(MatricNumber.getText().toString()) ,
+                                createSiswamail(MatricNumber.getText().toString()));
                         DatabaseReference StudentInfo = db.getReference("Student_Info");
                         StudentInfo.child(MatricNumber.getText().toString()).setValue(insertNew);
                     }catch (Exception e){
@@ -105,5 +102,13 @@ public class Test_appearance extends Fragment {
         return v;
     }
 
-
+    public String createSiswamail(String matricNo){
+        matricNo += "@siswa.um.edu.my";
+        String siswa = matricNo.toLowerCase();
+        return siswa;
+    }
+    public String unifyMatricNo(String matricNo){
+    String unified = matricNo.toUpperCase();
+    return unified;
+    }
 }

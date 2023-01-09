@@ -129,7 +129,7 @@ public class InsertEvent extends Fragment {
 
                         String eventImage = setImage(eventImg);
 
-                        InsertData(eventName.getText().toString(),eventVenue.getText().toString(),eventDetail.getText().toString(),
+                        InsertEventData(eventName.getText().toString(),eventVenue.getText().toString(),eventDetail.getText().toString(),
                                 eventCategory,eventDate,eventTime,eventImage);
                     }
                 }
@@ -139,7 +139,7 @@ public class InsertEvent extends Fragment {
         return view;
     }
 
-    public boolean InsertData(String eventName, String eventVenue, String eventDetail, String eventCategory, String eventDate,
+    public boolean InsertEventData(String eventName, String eventVenue, String eventDetail, String eventCategory, String eventDate,
                               String eventTime, String eventImage){
         EventData insertEvent = new EventData(eventName,eventVenue,eventDetail,eventCategory,eventDate,eventTime, eventImage);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -150,7 +150,7 @@ public class InsertEvent extends Fragment {
                 Toast.makeText(getActivity(),"Successfully added",Toast.LENGTH_LONG).show();
             }
         });
-        return false;
+        return true;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

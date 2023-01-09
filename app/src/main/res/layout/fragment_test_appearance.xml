@@ -23,21 +23,8 @@
         android:hint="Enter your name"
         android:textColorHint="@android:color/darker_gray"/>
 
-    <TextView
-        android:textColor="@android:color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="Siswamail:" />
 
-    <EditText
-        android:textColor="@android:color/white"
-        android:id="@+id/siswamail_get"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:hint="Enter your siswamail"
-        android:textColorHint="@android:color/darker_gray"/>
+
 
     <TextView
         android:textColor="@android:color/white"
