@@ -1,5 +1,6 @@
 package com.example.um_event;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,16 +10,21 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.um_event.LoginActivity;
 import com.example.um_event.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private ImageButton buttonBackLogin;
     private Button newCreatingAccountButton;
     private EditText matricNumber, username, password, conPassword;
-    private CheckBox sportsCheck, carnivalCheck, talksCheck, artsCheck, webminarCheck, showcaseCheck, educationalCheck;
+    private CheckBox sportsCheck, carnivalCheck, talksCheck, artsCheck, webinarCheck, showcaseCheck, educationalCheck;
     private String checks = "";
 
     @Override
@@ -37,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         carnivalCheck = (CheckBox) findViewById(R.id.carnivalCheckbox);
         talksCheck = (CheckBox) findViewById(R.id.talkCheckbox);
         artsCheck = (CheckBox) findViewById(R.id.artsCheckbox);
-        webminarCheck = (CheckBox) findViewById(R.id.webinarCheckbox);
+        webinarCheck = (CheckBox) findViewById(R.id.webinarCheckbox);
         showcaseCheck = (CheckBox) findViewById(R.id.showcaseCheckbox);
         educationalCheck = (CheckBox) findViewById(R.id.educationalCheckbox);
 
@@ -55,13 +61,14 @@ public class RegisterActivity extends AppCompatActivity {
         newCreatingAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 openHomePage();
             }
         });
     }
 
     // Methods to check what is being checked
-    public void Check(View v) {
+    public String Check() {
 
         if(sportsCheck.isChecked())
             checks += "Sport ";
@@ -71,13 +78,13 @@ public class RegisterActivity extends AppCompatActivity {
             checks += "Talk ";
         if(artsCheck.isChecked())
             checks += "Art ";
-        if(webminarCheck.isChecked())
+        if(webinarCheck.isChecked())
             checks += "Webinar ";
         if(showcaseCheck.isChecked())
             checks += "Showcase ";
         if(educationalCheck.isChecked())
             checks += "Educational";
-
+        return checks;
     }
 
     // Methods to go back to login page
@@ -91,4 +98,19 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+//    public boolean InsertRegisterData(String eventName, String eventVenue, String eventDetail, String eventCategory, String eventDate,
+//                                   String eventTime, String eventImage){
+//        EventData insertEvent = new EventData(eventName,eventVenue,eventDetail,eventCategory,eventDate,eventTime, eventImage);
+//        FirebaseDatabase db = FirebaseDatabase.getInstance();
+//        DatabaseReference eventTable = db.getReference("Event_Node");
+//        eventTable.child(eventName).setValue(insertEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                Toast.makeText(getActivity(),"Successfully added",Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        return true;
+//    }
+
 }
