@@ -1,5 +1,6 @@
 package com.example.um_event;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,7 +52,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(null, "YOu clicked RIck Roll!!!" , Toast.LENGTH_SHORT).show();
+               // System.out.println(" IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN ");
 
             }
         });
@@ -83,6 +84,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         byte[] imageBytes = Base64.decode(imageData, Base64.DEFAULT);
         // Convert the image bytes into a Bitmap object
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+    }
+
+    public void filterList(ArrayList<EventData> filteredList){
+        myEventData = filteredList;
+        notifyDataSetChanged();
     }
 
 }

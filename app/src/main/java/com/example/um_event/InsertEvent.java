@@ -150,7 +150,6 @@ public class InsertEvent extends Fragment {
                 Toast.makeText(getActivity(),"Successfully added",Toast.LENGTH_LONG).show();
             }
         });
-        //eventTable.push().setValue(insertEvent);
         return false;
     }
 

@@ -1,13 +1,16 @@
 package com.example.um_event;
 
-import static android.content.ContentValues.TAG;
-
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,13 +25,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class SearchFragment extends Fragment {
-    long numChildren;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,19 +72,53 @@ public class SearchFragment extends Fragment {
         }
     }
 
+
+    ArrayList<EventData> myEventData;
+    EventAdapter myEventAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_search, container, false);
+        ImageButton searchBtn = v.findViewById(R.id.search_btn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the input method manager
+                InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        EventAdapter myEventAdapter;
+                // Check if the keyboard is showing
+                if (inputMethodManager.isAcceptingText()) {
+                    // Hide the keyboard
+                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                }
+            }
+        });
+
+        EditText searchBar = v.findViewById(R.id.search_bar);
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+
         RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //EventData[] dataArray = new EventData[6];
-        ArrayList<EventData> myEventData = new ArrayList<>();
+
+        myEventData = new ArrayList<>();
         myEventAdapter = new EventAdapter(myEventData,getActivity());
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -89,77 +126,28 @@ public class SearchFragment extends Fragment {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for (DataSnapshot dataSnapshot :snapshot.getChildren() ){
                     EventData getData = dataSnapshot.getValue(EventData.class);
                     myEventData.add(getData);
-
                 }
                 myEventAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println(error);
             }
         });
-
-
 
         recyclerView.setAdapter(myEventAdapter);
         return v;
     }
+    public void filter(String in){
+        ArrayList<EventData> filteredList = new ArrayList<>();
+        for (EventData item : myEventData){
+            if (item.getEventName().toLowerCase().contains(in.toLowerCase())){
+            filteredList.add(item);
+            }
+        }
+        myEventAdapter.filterList(filteredList);
+    }
 }
-
-
-
-//private void readData(String username) {
-//
-//        reference = FirebaseDatabase.getInstance().getReference("Users");
-//        reference.child(username).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//
-//                if (task.isSuccessful()){
-//
-//                    if (task.getResult().exists()){
-//
-//                        Toast.makeText(ReadData.this,"Successfully Read",Toast.LENGTH_SHORT).show();
-//                        DataSnapshot dataSnapshot = task.getResult();
-//                        String firstName = String.valueOf(dataSnapshot.child("firstName").getValue());
-//                        String lastName = String.valueOf(dataSnapshot.child("lastName").getValue());
-//                        String age = String.valueOf(dataSnapshot.child("age").getValue());
-//                        binding.tvFirstName.setText(firstName);
-//                        binding.tvLastName.setText(lastName);
-//                        binding.tvAge.setText(age);
-//
-//
-//                    }else {
-//
-//                        Toast.makeText(ReadData.this,"User Doesn't Exist",Toast.LENGTH_SHORT).show();
-//
-//                    }
-//
-//
-//                }else {
-//
-//                    Toast.makeText(ReadData.this,"Failed to read",Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
-//
-//    }
-
-// Iterate over all the children of the database reference
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                        // Get the value at this snapshot and create an eventData object
-//
-//                        String name = snapshot.child("eventName").getValue(String.class);
-//        String date = snapshot.child("eventDate").getValue(String.class);
-//        String venue = snapshot.child("eventVenue").getValue(String.class);
-//        String time = snapshot.child("eventTime").getValue(String.class);
-//        String detail = snapshot.child("eventDetail").getValue(String.class);
-//        String category = snapshot.child("eventCategory").getValue(String.class);
-//        String image = snapshot.child("eventImage").getValue(String.class);
-//        EventData data = new EventData(name, venue, detail, category,date,time,image);
