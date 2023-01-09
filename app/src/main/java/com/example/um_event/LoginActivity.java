@@ -1,5 +1,6 @@
 package com.example.um_event;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Testing back button
+
 
         // Fetch information from the registration page.
         username = (EditText) findViewById(R.id.loginUsername);
@@ -81,6 +85,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         });
         //----------------------------------------------------------------------------------------------------------------------
+
 
     }
 
