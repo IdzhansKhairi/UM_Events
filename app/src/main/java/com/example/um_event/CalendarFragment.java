@@ -39,8 +39,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     private void initWidgets()
     {
-        calendarRecyclerView = calendarRecyclerView.findViewById();
-        monthYearText = monthYearText.findViewById();
+//        calendarRecyclerView = calendarRecyclerView.findViewById();
+//        monthYearText = monthYearText.findViewById();
     }
 
     private void setMonthView()
@@ -49,9 +49,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
-        calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+//        calendarRecyclerView.setLayoutManager(layoutManager);
+//        calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
     public void previousMonthAction(View view)
@@ -82,6 +82,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     public void weeklyAction(View view)
     {
-        startActivity(new Intent((this, CalendarAddEventActivity.class)) ;
+//        startActivity(new Intent((this, CalendarAddEventActivity.class)) ;
     }
 }
