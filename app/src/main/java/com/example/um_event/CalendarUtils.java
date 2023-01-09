@@ -22,20 +22,18 @@ public class CalendarUtils
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return date.format(formatter);
         }
-
         return null;
     }
 
     public static String formattedTime(LocalTime time)
     {
         DateTimeFormatter formatter = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return time.format(formatter);
         }
-
         return null;
     }
 
@@ -48,7 +46,6 @@ public class CalendarUtils
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return date.format(formatter);
         }
-
         return null;
     }
 
