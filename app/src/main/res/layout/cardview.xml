@@ -13,21 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#f0e3c5">
+        android:background="#b29f97">
 
 
         <ImageView
             android:id="@+id/eventImage"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:src="@drawable/spotify"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
             android:layout_weight="1"
             android:background="#b29f97"
-            />
+            android:src="@drawable/spotify" />
 
         <LinearLayout
+            android:background="#f0e3c5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:padding="16dp">
@@ -54,6 +56,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:background="#f0e3c5"
             android:padding="16dp">
 
             <ImageView

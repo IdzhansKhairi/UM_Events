@@ -81,6 +81,7 @@ public class SearchFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_search, container, false);
         ImageButton searchBtn = v.findViewById(R.id.search_btn);
+        //this method will hide keyboard when user press the search button
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +97,7 @@ public class SearchFragment extends Fragment {
         });
 
         EditText searchBar = v.findViewById(R.id.search_bar);
+        //implementing the search filter
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -117,7 +119,6 @@ public class SearchFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         myEventData = new ArrayList<>();
         myEventAdapter = new EventAdapter(myEventData,getActivity());
 
@@ -126,6 +127,7 @@ public class SearchFragment extends Fragment {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //get data from database and insert into a new EventData object
                 for (DataSnapshot dataSnapshot :snapshot.getChildren() ){
                     EventData getData = dataSnapshot.getValue(EventData.class);
                     myEventData.add(getData);
@@ -137,10 +139,10 @@ public class SearchFragment extends Fragment {
                 System.out.println(error);
             }
         });
-
         recyclerView.setAdapter(myEventAdapter);
         return v;
     }
+
     public void filter(String in){
         ArrayList<EventData> filteredList = new ArrayList<>();
         for (EventData item : myEventData){

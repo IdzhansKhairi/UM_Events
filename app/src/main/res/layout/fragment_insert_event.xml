@@ -156,7 +156,7 @@
                 android:layout_height="600px"
                 android:layout_gravity="center"
                 android:id="@+id/octaverseImg"
-                android:src="@drawable/solution"/>
+                android:src="@drawable/octaverse"/>
 
         </LinearLayout>
     </ScrollView>
