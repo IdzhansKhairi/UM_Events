@@ -1,55 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="330dp"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="15dp"
-
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="8dp"
+    app:cardCornerRadius="20dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#f0e3c5">
+
+
+        <ImageView
+            android:id="@+id/eventImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/spotify"
+            android:layout_weight="1"
+            android:background="#b29f97"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/CVImage"
-                android:layout_width="match_parent"
-                android:layout_height="163dp"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/spotify" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/name_label"
+                android:text="Name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="30dp">
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/CVName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:text="Name"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/CVDetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Details"
-                    android:textSize="20dp"
-                    android:textStyle="italic"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="start" />
-
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/favorite_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_favorite" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:text="Date"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_toRightOf="@+id/date_label"
+                android:id="@+id/time_label"
+                android:layout_marginLeft="250dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textAlignment="textEnd"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/venue_label"
+                android:textAlignment="viewStart"
+                android:text="Venue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:layout_below="@+id/date_label"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
