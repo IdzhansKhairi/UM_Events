@@ -1,6 +1,10 @@
 package com.example.um_event;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,31 +13,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
-    //This part fetch the data from the xml file
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView movieImage;
-        TextView TVName, TVDetail;
 
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            movieImage = itemView.findViewById(R.id.CVImage);
-            TVName = itemView.findViewById(R.id.CVName);
-            TVDetail = itemView.findViewById(R.id.CVDetail);
-
-        }
-    }
-
-    EventData[] myEventData;
-    Context context;
+    ArrayList<EventData> myEventData;
+    //EventData[] myEventData;
+    FragmentActivity activity;
     //constructor
-    public EventAdapter(EventData[] myEventData) {
+    public EventAdapter(ArrayList<EventData> myEventData, FragmentActivity activity) {
         this.myEventData = myEventData;
-       // this.context = activity;
+        this.activity = activity;
     }
 
     @NonNull
@@ -47,15 +41,18 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final EventData myEventDataList = myEventData[position];
-        holder.TVName.setText(myEventDataList.getEventName());
-        holder.TVDetail.setText(myEventDataList.getEventDate());
-       // holder.movieImage.setImageResource(myEventDataList.getEventImage());
+
+        EventData eventData = myEventData.get(position);
+        holder.TVName.setText(eventData.getEventName());
+        holder.TVDate.setText(eventData.getEventDate());
+        holder.TVTime.setText(eventData.getEventTime());
+        holder.TVVenue.setText(eventData.getEventVenue());
+        holder.movieImage.setImageBitmap(convertImage(eventData.getEventImage()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"YOu clicked RIck Roll!!!" , Toast.LENGTH_SHORT).show();
+               // System.out.println(" IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN ");
 
             }
         });
@@ -63,8 +60,35 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return myEventData.length;
+        return myEventData.size();
     }
 
+    //This part fetch the data from the xml file
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        ImageView movieImage;
+        TextView TVName, TVDate,TVTime, TVVenue;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            movieImage = itemView.findViewById(R.id.eventImage);
+            TVName = itemView.findViewById(R.id.name_label);
+            TVDate = itemView.findViewById(R.id.date_label);
+            TVTime = itemView.findViewById(R.id.time_label);
+            TVVenue = itemView.findViewById(R.id.venue_label);
+
+        }
+    }
+
+    public static Bitmap convertImage(String imageData){
+        // Decode the Base64 encoded string
+        byte[] imageBytes = Base64.decode(imageData, Base64.DEFAULT);
+        // Convert the image bytes into a Bitmap object
+        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+    }
+
+    public void filterList(ArrayList<EventData> filteredList){
+        myEventData = filteredList;
+        notifyDataSetChanged();
+    }
 
 }

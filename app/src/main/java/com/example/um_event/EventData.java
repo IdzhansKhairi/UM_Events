@@ -10,10 +10,12 @@ public class EventData {
     private String EventVenue;
     private String EventDetail;
     private String EventCategory;
-    private Integer EventImage;
+    private String EventImage; //
 
-    public EventData(String eventName, String eventVenue, String eventDetail, String eventCategory, String eventDate, String eventTime,
-                     Integer eventImage) {
+    public EventData() {
+    }
+
+    public EventData(String eventName, String eventVenue, String eventDetail, String eventCategory, String eventDate, String eventTime, String eventImage) {
         this.EventName = eventName;
         this.EventDate = eventDate;
         this.EventTime = eventTime;
@@ -23,11 +25,11 @@ public class EventData {
         this.EventImage = eventImage;
     }
 
-    public Integer getEventImage() {
+    public String getEventImage() {
         return EventImage;
     }
 
-    public void setEventImage(Integer eventImage) {
+    public void setEventImage(String eventImage) {
         EventImage = eventImage;
     }
 

@@ -46,90 +46,83 @@
                 android:gravity="top|left"
                 android:textColorHint="#555555" />
 
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="top|left">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
 
-                <RadioGroup
-                    android:id="@+id/radioGroup"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <CheckBox
+                        android:text="Sport"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/CBSport"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"/>
 
-                        <RadioButton
-                            android:text="Sport"
-                            android:layout_marginRight="20dp"
-                            android:textColor="@color/white"
-                            android:id="@+id/RBSport"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"/>
-
-                        <RadioButton
-                            android:text="Carnival"
-                            android:layout_marginRight="20dp"
-                            android:id="@+id/RBCarnival"
-                            android:textColor="@color/white"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"/>
-
-                        <RadioButton
-                            android:text="Talk"
-                            android:id="@+id/RBTalk"
-                            android:layout_marginRight="20dp"
-                            android:textColor="@color/white"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"/>
-                        <RadioButton
-                            android:text="Art"
-                            android:id="@+id/RBArt"
-                            android:layout_marginRight="20dp"
-                            android:textColor="@color/white"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <CheckBox
+                        android:text="Carnival"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/CBCarnival"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent" />
 
-                        <RadioButton
-                            android:text="Webinar"
-                            android:id="@+id/RBWebinar"
-                            android:layout_marginRight="20dp"
-                            android:textColor="@color/white"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"/>
+                    <CheckBox
+                        android:text="Talk"
+                        android:id="@+id/CBTalk"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
 
-                        <RadioButton
-                            android:text="Showcase"
-                            android:id="@+id/RBShowcase"
-                            android:layout_marginRight="20dp"
-                            android:textColor="@color/white"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"/>
-                        <RadioButton
-                            android:text="Educational"
-                            android:id="@+id/RBEducational"
-                            android:layout_marginRight="20dp"
-                            android:textColor="@color/white"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"/>
-                    </LinearLayout>
+                    <CheckBox
+                        android:text="Art"
+                        android:id="@+id/CBArt"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
 
-                </RadioGroup>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <CheckBox
+                        android:text="Webinar"
+                        android:id="@+id/CBWebinar"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
 
+                    <CheckBox
+                        android:text="Showcase"
+                        android:id="@+id/CBShowcase"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                    <CheckBox
+                        android:text="Educational"
+                        android:id="@+id/CBEducational"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
             </LinearLayout>
+
+
 
             <DatePicker
                 android:id="@+id/datePicker"
@@ -159,11 +152,11 @@
                 android:text="Submit" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="600px"
+                android:layout_height="600px"
+                android:layout_gravity="center"
                 android:id="@+id/octaverseImg"
                 android:src="@drawable/octaverse"/>
-
 
         </LinearLayout>
     </ScrollView>

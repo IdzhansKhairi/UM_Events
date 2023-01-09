@@ -1,16 +1,21 @@
 package com.example.um_event;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +24,8 @@ import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +33,7 @@ import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -78,9 +86,10 @@ public class InsertEvent extends Fragment {
     EditText eventName, eventDetail, eventVenue;
     DatePicker pickDate; TimePicker pickTime;
     Button insertBtn;
-    RadioGroup radioGroup;
     String eventCategory, eventTime, eventDate;
     ImageView eventImg;
+    CheckBox sportCB, carnivalCB, talkCB, artCB, webinarCB, showcaseCB, educationalCB;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,7 +101,9 @@ public class InsertEvent extends Fragment {
         eventVenue = view.findViewById(R.id.ETEventVenue);
         pickDate = view.findViewById(R.id.datePicker);
         pickTime = view.findViewById(R.id.timePicker);
-        radioGroup = view.findViewById(R.id.radioGroup);
+        sportCB = view.findViewById(R.id.CBSport); carnivalCB = view.findViewById(R.id.CBCarnival); talkCB = view.findViewById(R.id.CBTalk);
+        artCB = view.findViewById(R.id.CBArt); webinarCB = view.findViewById(R.id.CBWebinar); showcaseCB = view.findViewById(R.id.CBShowcase);
+        educationalCB = view.findViewById(R.id.CBEducational);
         insertBtn = view.findViewById(R.id.InserEventBtn);
         eventImg = view.findViewById(R.id.octaverseImg);
 
@@ -104,21 +115,22 @@ public class InsertEvent extends Fragment {
                 if (eventName.getText().toString().isEmpty() || eventDetail.getText().toString().isEmpty() || eventVenue.getText().toString().isEmpty()){
                     Toast.makeText(null,"Please fill in",Toast.LENGTH_LONG).show();
                 }else{
-                    if (radioGroup.getCheckedRadioButtonId()!=-1){
+                    if (!sportCB.isChecked() && !carnivalCB.isChecked() && !talkCB.isChecked() && !artCB.isChecked() && !webinarCB.isChecked() &&
+                            !showcaseCB.isChecked() && !educationalCB.isChecked()){
 
-                        eventCategory = setCategory(radioGroup);
-                        int dayOfMonth = pickDate.getDayOfMonth();
-                        DateFormat dateFormat = DateFormat.getDateInstance();
-                        eventDate = dateFormat.format(dayOfMonth);
+                        Toast.makeText(getContext(),"Please select a category",Toast.LENGTH_LONG).show();
+
+                    }else{
+                        eventCategory = setCategory(sportCB,carnivalCB,talkCB, artCB, webinarCB, showcaseCB, educationalCB );
+
+                        eventDate = setDateString(pickDate);
 
                         eventTime = setTime(pickTime);
 
-                        Integer eventImage = setImage(eventImg);
+                        String eventImage = setImage(eventImg);
 
-                InsertData(eventName.getText().toString(),eventVenue.getText().toString(),eventDetail.getText().toString(),
-                        eventCategory,eventDate,eventTime,eventImage);
-                    }else{
-                        Toast.makeText(getContext(),"Please select a category",Toast.LENGTH_LONG).show();
+                        InsertData(eventName.getText().toString(),eventVenue.getText().toString(),eventDetail.getText().toString(),
+                                eventCategory,eventDate,eventTime,eventImage);
                     }
                 }
             }
@@ -127,74 +139,87 @@ public class InsertEvent extends Fragment {
         return view;
     }
 
-    public static boolean InsertData(String eventName, String eventVenue, String eventDetail,String eventCategory, String eventDate,
-                                     String eventTime,Integer eventImage){
-
+    public boolean InsertData(String eventName, String eventVenue, String eventDetail, String eventCategory, String eventDate,
+                              String eventTime, String eventImage){
+        EventData insertEvent = new EventData(eventName,eventVenue,eventDetail,eventCategory,eventDate,eventTime, eventImage);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference eventTable = db.getReference("Event_Node");
-
-        EventData insertEvent = new EventData(eventName,eventVenue,eventDetail,eventCategory,eventDate,eventTime,eventImage);
-        eventTable.push().setValue(insertEvent);
+        eventTable.child(eventName).setValue(insertEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getActivity(),"Successfully added",Toast.LENGTH_LONG).show();
+            }
+        });
         return false;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static String setTime(TimePicker timePicker){
+    public String setTime(TimePicker timePicker){
         int hour = timePicker.getHour();
         int minute = timePicker.getMinute();
 
-        DateFormat timeFormat = DateFormat.getTimeInstance();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
 
         String timeString = timeFormat.format(calendar.getTime());
+
         return timeString;
     }
 
-    public static String setCategory(RadioGroup radioGroup){
-        int checkedRBid = radioGroup.getCheckedRadioButtonId();
-         String eventCategory = "";
-        switch (checkedRBid){
-            case R.id.RBSport:
-                eventCategory =  "Sport";
-                break;
-            case R.id.RBCarnival:
-                eventCategory =  "Carnival";
-                break;
-            case R.id.RBTalk:
-                eventCategory =  "Talk";
-                break;
-            case R.id.RBArt:
-                eventCategory =  "Art";
-                break;
-            case R.id.RBWebinar:
-                eventCategory =  "Webinar";
-                break;
-            case R.id.RBShowcase:
-                eventCategory =  "Showcase";
-                break;
-            case R.id.RBEducational:
-                eventCategory =  "Educational";
-                break;
-            default:
-                Toast.makeText(null, "Please select a category",Toast.LENGTH_LONG).show();
-                break;
+    public String setCategory(CheckBox C1, CheckBox C2, CheckBox C3, CheckBox C4, CheckBox C5, CheckBox C6, CheckBox C7 ){
+        String eventCategory = "";
+        if(C1.isChecked()){
+            eventCategory +="Sport ";
         }
+        if(C2.isChecked()){
+            eventCategory +="Carnival ";
+        }
+        if(C3.isChecked()){
+            eventCategory +="Talk ";
+        }
+        if(C4.isChecked()){
+            eventCategory +="Art ";
+        }
+        if(C5.isChecked()){
+            eventCategory +="Webinar ";
+        }
+        if(C6.isChecked()){
+            eventCategory +="Showcase ";
+        }
+        if(C7.isChecked()){
+            eventCategory +="Educational";
+        }
+
         return eventCategory;
     }
 
-    public static Integer setImage(ImageView imageView){
-        imageView.setDrawingCacheEnabled(true);
-        imageView.buildDrawingCache();
-        Bitmap bitmap = imageView.getDrawingCache();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] data = baos.toByteArray();
+    public String setImage(ImageView imageView){
 
-        // Convert the bytes into an integer
-        ByteBuffer buffer = ByteBuffer.wrap(data);
-        Integer imageAsInt = buffer.getInt();
-        return  imageAsInt;
+        // Get the image view's drawable
+        Drawable drawable = imageView.getDrawable();
+        // Convert the drawable to a bitmap
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        // Convert the bitmap to a byte array
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] imageBytes = stream.toByteArray();
+
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    public String setDateString(DatePicker datePicker) {
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy");
+        return dateFormat.format(calendar.getTime());
     }
 }
