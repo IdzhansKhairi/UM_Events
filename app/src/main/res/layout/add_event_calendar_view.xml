@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#252525"
     android:orientation="vertical"
-    tools:context=".CalendarAddEventActivity">
+    tools:context=".CalendarAddEventFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,6 +16,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/previous_week_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,6 +38,7 @@
             android:textSize="20sp" />
 
         <Button
+            android:id="@+id/next_week_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -128,6 +130,7 @@
         android:layout_weight="1" />
 
     <Button
+        android:id="@+id/new_event_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
