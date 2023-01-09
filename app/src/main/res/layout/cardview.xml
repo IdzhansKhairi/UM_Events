@@ -56,37 +56,62 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <ImageView
+                android:id="@+id/dateIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar"/>
+
             <TextView
                 android:id="@+id/date_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="viewStart"
                 android:text="Date"
-                android:textSize="16sp" />
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@id/dateIcon"/>
+
+            <ImageView
+                android:id="@+id/clockIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_time"
+                android:layout_marginLeft="250dp"
+                android:layout_toRightOf="@id/dateIcon"/>
 
             <TextView
-                android:layout_toRightOf="@+id/date_label"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/clockIcon"
                 android:id="@+id/time_label"
-                android:layout_marginLeft="250dp"
+                android:layout_marginLeft="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time"
-                android:textAlignment="textEnd"
                 android:textSize="16sp" />
 
+            <ImageView
+                android:id="@+id/placeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_place_24"
+                android:layout_marginTop="18dp"
+                android:layout_below="@+id/dateIcon" />
+
             <TextView
+                android:textStyle="bold"
                 android:id="@+id/venue_label"
-                android:textAlignment="viewStart"
                 android:text="Venue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textSize="14sp"
-                android:layout_below="@+id/date_label"/>
+                android:textSize="16sp"
+                android:layout_marginTop="42dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/placeIcon"/>
 
         </RelativeLayout>
-
 
     </LinearLayout>
 
