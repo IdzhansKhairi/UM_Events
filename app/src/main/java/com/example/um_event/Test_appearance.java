@@ -1,17 +1,21 @@
 package com.example.um_event;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +66,7 @@ public class Test_appearance extends Fragment {
 
     private EditText Name, Siswamail , MatricNumber;
     private Button sbmtBtn;
+    private ImageView getImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,21 +77,24 @@ public class Test_appearance extends Fragment {
         Name = v.findViewById(R.id.fullname_get);
         Siswamail = v.findViewById(R.id.siswamail_get);
         MatricNumber = v.findViewById(R.id.matricNumber_get);
+        getImage = v.findViewById(R.id.convertImg);
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference StudentInfo = db.getReference("Student_Info");
+
 
         sbmtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ////////////////////////////////////////////////////////
                 if(Name.getText().toString().isEmpty() || Siswamail.getText().toString().isEmpty() || MatricNumber.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Please Fill All Blanks", Toast.LENGTH_LONG).show();
                 }else{
                     try {
                         StudentData insertNew = new StudentData(Name.getText().toString(),MatricNumber.getText().toString(),
                                 Siswamail.getText().toString());
-
-                        StudentInfo.push().setValue(insertNew);
+                        DatabaseReference StudentInfo = db.getReference("Student_Info");
+                        StudentInfo.child(MatricNumber.getText().toString()).setValue(insertNew);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -94,14 +102,8 @@ public class Test_appearance extends Fragment {
             }
         });
 
-
-
-
-
-
-
-
-
         return v;
     }
+
+
 }
