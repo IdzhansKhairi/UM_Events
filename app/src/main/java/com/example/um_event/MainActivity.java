@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_setting:
                     //replaceFragment(new Test_appearance());
                    // replaceFragment(new InsertEvent());
-                    replaceFragment(new SettingsFragment());
+//                    replaceFragment(new SettingsFragment());
+                    replaceFragment(new SettingClientFragment());
                     break;
             }
 

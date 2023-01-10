@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".RegisterOrganizerActivity">
+    tools:context=".RegisterOrganizerActivity"
+    style="@style/SCREEN">
 
     <ImageButton
         android:id="@+id/backRegisterImageButton"
@@ -32,7 +33,8 @@
         android:padding="10dp"
         android:text="Create Your Account"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        style="@style/TEXT"/>
 
     <ScrollView
         android:layout_width="380dp"
@@ -58,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:text="Organizer Information"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                style="@style/TEXT"/>
 
             <EditText
                 android:id="@+id/registerName"
@@ -93,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:text="(Fill your phone number in 0123456789 form)"
                 android:textSize="13dp"
-                android:textColor="#000000"/>
+                style="@style/TEXT"/>
 
             <!--Account Information Related-->
             <TextView
@@ -103,7 +106,8 @@
                 android:layout_marginTop="30dp"
                 android:text="Account Information"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                style="@style/TEXT"/>
 
             <EditText
                 android:id="@+id/registerUsername"

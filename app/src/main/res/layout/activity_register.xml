@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".RegisterActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    style="@style/SCREEN">
 
     <include
         layout="@layout/create_acc_toolbar"
@@ -30,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColor="#444444"
+                style="@style/TEXT"
                 android:text="Account Information"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -74,7 +75,7 @@
             <!--This part is for checkboxx-->
             <TextView
                 android:id="@+id/DesiredEventsType"
-                android:textColor="#444444"
+                style="@style/TEXT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
