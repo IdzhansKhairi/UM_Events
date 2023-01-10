@@ -1,10 +1,7 @@
 <resources>
-
     <string name="app_name">Testing Subject</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="back"><![CDATA[<-]]></string>
-    <string name="forward"><![CDATA[->]]></string>
     <string name="SEV2">Comic Fiesta is one of Southeast Asia’s largest and longest-running animation, comics and games (ACG) event. We gather tens of thousands of comic artists, illustrators, cosplayers and fans of the culture every year!
 </string>
     <string name="time">10AM - 10PM</string>
@@ -13,4 +10,3 @@
     <string name="website">https://www.comicfiesta.org/</string>
     <string name="set">Set it on calendar so you won’t forget about the event!!!</string>
 </resources>
-
