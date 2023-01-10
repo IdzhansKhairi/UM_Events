@@ -59,6 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
                 Bundle bundle = new Bundle();
                 bundle.putString("EventName",holder.TVName.getText().toString());
+                open.setArguments(bundle);
 
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.Frame_Layout,open).addToBackStack(null).commit();
             }
