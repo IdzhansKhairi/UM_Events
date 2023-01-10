@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private Button buttonregister, buttonLogin, buttonregisterOrganiser, buttonTest;
-    private String[] credential = {"Students", "Organizers", "Admin"};
+    private String[] credential = {"Students", "Organizers"};
     private EditText username, password;
     private Spinner credentials;
     private TextView viewUsername, viewPassword, viewCredentials;
