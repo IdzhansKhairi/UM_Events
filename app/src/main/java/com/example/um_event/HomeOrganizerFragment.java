@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeOrganizerFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HomeFragment() {
+    public HomeOrganizerFragment() {
         // Required empty public constructor
     }
 
@@ -73,42 +73,27 @@ public class HomeFragment extends Fragment {
     }
 
     ArrayList<EventData> myEventData;
-    HomeAdapter myEventAdapter;
+    EventAdapter myEventAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        View v = inflater.inflate(R.layout.fragment_home_organizer, container, false);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
         boolean nightMODE = sharedPreferences.getBoolean("night", false); // Light mode is the default mode
         if (nightMODE) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
-        ImageView organizerBtn;
-
-        organizerBtn = v.findViewById(R.id.HomeOragnizerBtn);
-
-        organizerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Frame_Layout, new HomeOrganizerFragment());
-                fragmentTransaction.commit();
-
-            }
-        });
-        
-//        Home recycler
+//      organizer recycler
         RecyclerView recyclerView = v.findViewById(R.id.HomeOrganizerEventRecylerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         myEventData = new ArrayList<>();
-        myEventAdapter = new HomeAdapter(myEventData,getActivity());
+        myEventAdapter = new EventAdapter(myEventData,getActivity());
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference database = db.getReference("Event_Node");
@@ -128,10 +113,19 @@ public class HomeFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(myEventAdapter);
-        myEventAdapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
+
+
+        ImageView organizerAdd = v.findViewById(R.id.HomeOrgainzerAddBtn);
+
+        organizerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemCLick(int position) {
-//                myEventAdapter.get(position)
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Frame_Layout, new OrganizerAddFragment());
+                fragmentTransaction.commit();
+
             }
         });
 
