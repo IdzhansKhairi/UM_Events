@@ -18,7 +18,7 @@
         android:background="@null"
         android:onClick="weeklyAction"
         android:text="Add Event"
-        android:textColor="#4842FF"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:background="@null"
             android:onClick="previousMonthAction"
             android:text="@string/back"
-            android:textColor="#4842FF"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
             android:background="@null"
             android:onClick="nextMonthAction"
             android:text="@string/forward"
-            android:textColor="#4842FF"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
