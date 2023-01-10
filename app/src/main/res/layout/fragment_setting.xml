@@ -108,8 +108,8 @@
 
     <Button
         android:id="@+id/contactUsBtn"
-        android:layout_width="465dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="418dp"
         android:layout_marginBottom="265dp"
         android:text="Contact Us"
@@ -121,8 +121,8 @@
 
     <Button
         android:id="@+id/feedbackBtn"
-        android:layout_width="465dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="FEEDBACK"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

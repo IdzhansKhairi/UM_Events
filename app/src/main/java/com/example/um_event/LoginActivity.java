@@ -35,12 +35,13 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        checkLog();
 
         // Fetch information from the registration page.
         username = findViewById(R.id.loginUsername);
         password =  findViewById(R.id.loginPassword);
         credentials =  findViewById(R.id.credentials_spinner);
+
+        checkLog(username.getText().toString());
 
         // This part is for the spinner
         // Getting the instance of Spinner and applying OnItemSelectedListener on it
@@ -62,10 +63,20 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                 db.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
-                                if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
-                                    authenticationUser();
+                        boolean userExist = false;
+                        if (username.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
+                            Toast.makeText(getApplicationContext(),"Please enter your username and password",Toast.LENGTH_SHORT).show();
+                        }else{
+                            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
+                                    userExist = true;
+                                    if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
+                                        authenticationUser(username.getText().toString());
+                                    }else
+                                        Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
+                                }else{
+                                    if (!userExist)
+                                        Toast.makeText(getApplicationContext(),"No Username Found",Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
@@ -143,19 +154,19 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
 
-    private void authenticationUser(){
+    private void authenticationUser(String username){
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("User","true");
+        editor.putString("User",username);
         editor.apply();
         openHomePage();
     }
 
-    private void checkLog(){
+    private void checkLog(String username){
         SharedPreferences SP = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
-        String check = SP.getString("User","");
-        if(check.equals("true")){
+        String check = SP.getString("User","No");
+        if(check.equals(username)){
             Toast.makeText(getApplicationContext(),"Login Successfully",Toast.LENGTH_LONG).show();
             openHomePage();
             finish();
