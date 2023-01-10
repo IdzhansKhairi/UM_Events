@@ -38,10 +38,10 @@ public class SettingClientFragment extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
         nightMODE = sharedPreferences.getBoolean("night", false); // Light mode is the default mode
 
-//        if (nightMODE) {
+//       // if (nightMODE) {
 //            switcher.setChecked(true);
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//        }
+//      //  }
 
         switcher.setOnClickListener(new View.OnClickListener() {
             @Override
