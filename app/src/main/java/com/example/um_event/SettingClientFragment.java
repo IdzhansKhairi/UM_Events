@@ -1,10 +1,11 @@
 package com.example.um_event;
 
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ public class SettingClientFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    public static final String SHARED_PREFS = "sharedPrefs";
 
     private String mParam1;
     private String mParam2;
@@ -59,7 +60,10 @@ public class SettingClientFragment extends Fragment {
     }
 
     private void signOut() {
-
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
         startActivity(loginIntent);
     }

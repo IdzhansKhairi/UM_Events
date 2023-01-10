@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,74 +9,123 @@
     <include layout="@layout/main_toolbar"/>
 
     <ImageView
-        android:id="@+id/profile_image_view"
-        android:layout_width="149dp"
-        android:layout_height="141dp"
-        android:background="@drawable/circular_profile_pic"
-        android:contentDescription="Profile image"
-        android:src="@drawable/basic_profile_pic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/userPP"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="131dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
-
+        app:srcCompat="@drawable/profile_pic" />
 
     <TextView
-        android:id="@+id/name_text_view"
+        android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="44dp"
-        android:text="Name"
-        android:textColor="#F4F0F0"
-        android:textSize="24sp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="107dp"
+        android:text="MUHAMMAD IDZHANS KHAIRI"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/education_header_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/userPP" />
 
+    <ImageButton
+        android:id="@+id/editprofileBtn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginBottom="470dp"
+        android:backgroundTint="#252525"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_icon" />
 
     <TextView
-        android:id="@+id/bio_text_view"
-        android:layout_width="58dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="80dp"
-        android:text="Bio"
-        android:textColor="#EAE4E4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/skills_header_text_view" />
-
-    <TextView
-        android:id="@+id/skills_header_text_view"
+        android:id="@+id/emailTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="Skills"
-        android:textColor="#F4EFEF"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="140dp"
+        android:text="U2000735@siswa.um.edu.my"
+        android:textColor="#00F4F4"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <TextView
-        android:id="@+id/education_header_text_view"
-        android:layout_width="252dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="40dp"
-        android:text="u2000000@siswa.um.edu.my"
-        android:textColor="#FAF8F8"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:id="@+id/status"
+        android:layout_width="158dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginEnd="127dp"
+        android:text="Logged in as a STUDENT"
+        android:textColor="#4842FF"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image_view" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
 
+    <Button
+        android:id="@+id/userSignoutBtn"
+        android:layout_width="109dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="151dp"
+        android:text="Sign out"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status" />
+
+    <TextView
+        android:id="@+id/helpandsupporttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="375dp"
+        android:layout_marginEnd="237dp"
+        android:layout_marginBottom="329dp"
+        android:text="Help and Support"
+        android:textColor="#FFFDFD"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/contactUsBtn"
+        android:layout_width="465dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="418dp"
+        android:layout_marginBottom="265dp"
+        android:text="Contact Us"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/feedbackBtn"
+        android:layout_width="465dp"
+        android:layout_height="48dp"
+        android:text="FEEDBACK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactUsBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
