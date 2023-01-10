@@ -66,7 +66,7 @@ public class SettingsFragment extends Fragment {
        View v = inflater.inflate(R.layout.fragment_setting, container, false);
 
         Button signOutBtn = v.findViewById(R.id.userSignoutBtn);
-        ImageButton editProfile = v.findViewById(R.id.editprofileBtn);
+
 
 
         signOutBtn.setOnClickListener(new View.OnClickListener() {
