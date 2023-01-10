@@ -1,128 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#252525">
+    android:padding="16dp"
+    style="@style/SCREEN">
+
+    <LinearLayout
+        android:id="@+id/switchDarkLightLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Dark Mode"
+            android:textSize="20dp"
+            style="@style/TEXT"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/switchDarkLight"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/profilePicture"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="87dp"
-        android:layout_marginEnd="131dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_pic" />
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="60dp"
+        android:textAlignment="center"
+        app:srcCompat="@drawable/profile_pic"
+        />
 
     <TextView
         android:id="@+id/profileName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="107dp"
+        android:layout_below="@+id/profilePicture"
+        android:layout_marginTop="20dp"
         android:text="MUHAMMAD IDZHANS KHAIRI"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
-
-    <ImageButton
-        android:id="@+id/editprofileBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="236dp"
-        android:layout_marginBottom="470dp"
-        android:backgroundTint="#252525"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileName"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/edit_icon" />
+        android:textAlignment="center"
+        style="@style/TEXT"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/emailTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="139dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="140dp"
+        android:layout_below="@+id/profileName"
+        android:layout_marginTop="10dp"
         android:text="U2000735@siswa.um.edu.my"
+        android:textAlignment="center"
         android:textColor="#00F4F4"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileName" />
+        android:textSize="14dp" />
 
     <TextView
         android:id="@+id/status"
-        android:layout_width="158dp"
+        android:layout_width="match_parent"
         android:layout_height="22dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginEnd="127dp"
         android:text="Logged in as a STUDENT"
         android:textColor="#4842FF"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
+        android:textSize="14dp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/emailTxt"/>
 
     <Button
         android:id="@+id/signoutBtn"
-        android:layout_width="109dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="151dp"
-        android:text="Sign out"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/status"
+        android:layout_marginTop="10dp"
+        android:text="Sign out" />
 
     <TextView
         android:id="@+id/helpandsupporttext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="375dp"
-        android:layout_marginEnd="237dp"
-        android:layout_marginBottom="329dp"
         android:text="Help and Support"
-        android:textColor="#FFFDFD"
+        style="@style/TEXT"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/signoutBtn"/>
 
     <Button
         android:id="@+id/contactUsBtn"
         android:layout_width="465dp"
         android:layout_height="48dp"
-        android:layout_marginTop="418dp"
-        android:layout_marginBottom="265dp"
         android:text="Contact Us"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_below="@+id/helpandsupporttext" />
 
-    <Button
-        android:id="@+id/feedbackBtn"
-        android:layout_width="465dp"
-        android:layout_height="48dp"
-        android:text="FEEDBACK"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contactUsBtn" />
+    <!--    <ImageButton-->
+<!--        android:id="@+id/editprofileBtn"-->
+<!--        android:layout_width="25dp"-->
+<!--        android:layout_height="25dp"-->
+<!--        android:layout_marginTop="236dp"-->
+<!--        android:layout_marginBottom="470dp"-->
+<!--        android:backgroundTint="#252525"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/profileName"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/edit_icon" />-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+<!--    <Button-->
+<!--        android:id="@+id/feedbackBtn"-->
+<!--        android:layout_width="465dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:text="FEEDBACK"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/contactUsBtn" />-->
+
+</RelativeLayout>
