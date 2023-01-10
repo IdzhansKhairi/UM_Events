@@ -102,24 +102,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-        //----------------------------------------------------------------------------------------------------------------------
-        // This part is for testing input button
-        viewUsername = (TextView) findViewById(R.id.showUsername);
-        viewPassword = (TextView) findViewById(R.id.showPassword);
-        viewCredentials = (TextView) findViewById(R.id.showCredentials);
-
-        buttonTest = (Button) findViewById(R.id.testInfo);
-        buttonTest.setOnClickListener(new View.OnClickListener() {
-            // .getText() is for fetching the text entered at the EditText
-            // .getSelectedItem() is for fetching the text choosen at the Spinner
-            @Override
-            public void onClick(View view) {
-                openHomePage();
-                Toast.makeText(getApplicationContext(), "Username : " + username.getText() + "\n" + "Password : " + password.getText() + "\n" + "Credentials : " + spinner.getSelectedItem().toString() +"\n", Toast.LENGTH_LONG).show();
-            }
-        });
-        //----------------------------------------------------------------------------------------------------------------------
-
     }
 
     // Methods for go to registration

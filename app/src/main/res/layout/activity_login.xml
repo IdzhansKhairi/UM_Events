@@ -131,13 +131,6 @@
                 android:layout_marginTop="4dp"
                 android:text="Create organizer account"/>
 
-            <Button
-                android:id="@+id/testInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Testing Button"/>
-
             <TextView
                 android:id="@+id/showUsername"
                 android:layout_width="wrap_content"
