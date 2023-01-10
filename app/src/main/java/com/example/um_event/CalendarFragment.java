@@ -3,9 +3,9 @@ package com.example.um_event;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
+//import androidx.navigation.NavController;
+//import androidx.navigation.Navigation;
+//import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import static com.example.um_event.CalendarUtils.daysInMonthArray;
 import static com.example.um_event.CalendarUtils.monthYearFromDate;
 
-import com.example.um_event.databinding.FragmentCalendarAddEventBinding;
-import com.example.um_event.databinding.FragmentCalendarBinding;
 
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener{
     private TextView monthYearText;
@@ -73,14 +71,14 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
 
 
-/*
+
         Button weeklyButton = view.findViewById(R.id.weekly_button);
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 weeklyAction(view);
             }
-        });*/
+        });
 /*
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
         binding.weeklyButton.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +104,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         return view;
     }
 
-    @Override
+   /* @Override
     public void onViewCreated( View view, Bundle savedInstanceState) {
         //navController = Navigation.findNavController(getParentFragment().getView(), R.id.nav_calendar);
         Button weeklyButton = view.findViewById(R.id.weekly_button);
@@ -117,7 +115,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             }
         };
         weeklyButton.setOnClickListener(OCLMessage);
-    }
+    }*/
 
 
     private void initWidgets(View view) {
