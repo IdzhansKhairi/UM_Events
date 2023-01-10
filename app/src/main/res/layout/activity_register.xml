@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    android:layout_height="wrap_content"
+    tools:context=".RegisterActivity"
+    android:orientation="vertical">
 
-    <include layout="@layout/create_acc_toolbar"/>
-
+    <include
+        layout="@layout/create_acc_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <ScrollView
-        android:layout_width="380dp"
-        android:layout_height="621dp"
-        android:layout_below="@+id/createToolbar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!--Account Information Related-->
@@ -135,4 +136,4 @@
         </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>
