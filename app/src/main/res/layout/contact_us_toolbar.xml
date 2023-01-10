@@ -5,11 +5,11 @@
     android:layout_height="wrap_content"
     android:background="@drawable/blue_gradient_umtouch"
     android:elevation="4dp"
-    android:id="@+id/createToolbar"
+    android:id="@+id/feedbackToolbar"
     >
 
     <ImageButton
-        android:id="@+id/backRegisterImageButton"
+        android:id="@+id/backFeedbackButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -18,7 +18,7 @@
         />
 
     <TextView
-        android:id="@+id/createYourAccount"
+        android:id="@+id/feedbackTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -27,9 +27,9 @@
         android:layout_marginStart="12dp"
         android:layout_toEndOf="@+id/backRegisterImageButton"
         android:padding="10dp"
-        android:text="Create Your Account"
+        android:text="Contact Us"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="#111111"/>
+        android:textColor="#FFFFFF"/>
 
 </androidx.appcompat.widget.Toolbar>

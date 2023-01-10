@@ -70,6 +70,24 @@ public class SettingClientFragment extends Fragment {
             }
         });
 
+        // Feedback Button
+        Button feedbackButton = view.findViewById(R.id.feedbackBtn);
+        feedbackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFeedbackActivity();
+            }
+        });
+
+        // Contact Us Button
+        Button contactUsButton = view.findViewById(R.id.contactUsBtn);
+        contactUsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openContactUsActivity();
+            }
+        });
+
         return view;
     }
 
@@ -102,5 +120,15 @@ public class SettingClientFragment extends Fragment {
         editor.apply();
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
         startActivity(loginIntent);
+    }
+
+    public void openFeedbackActivity() {
+        Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+        startActivity(intent);
+    }
+
+    public void openContactUsActivity() {
+        Intent intent = new Intent(getActivity(), ContactUsActivity.class);
+        startActivity(intent);
     }
 }
