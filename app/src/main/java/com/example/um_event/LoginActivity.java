@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
                 }
             });
-            });
+        });
 
         // This part is for register button
         buttonregister = findViewById(R.id.createAccountButton);
