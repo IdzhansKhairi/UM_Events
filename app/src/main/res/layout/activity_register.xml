@@ -1,54 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".RegisterActivity">
+    android:layout_height="wrap_content"
+    tools:context=".RegisterActivity"
+    android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/backRegisterImageButton"
-        android:layout_width="67dp"
-        android:layout_height="67dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
-
-    <TextView
-        android:id="@+id/createYourAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_toEndOf="@+id/backRegisterImageButton"
-        android:padding="10dp"
-        android:text="Create Your Account"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
+    <include
+        layout="@layout/create_acc_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <ScrollView
-        android:layout_width="380dp"
-        android:layout_height="621dp"
-        android:layout_below="@+id/backRegisterImageButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
 
         <LinearLayout
+            android:layout_marginStart="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!--Account Information Related-->
@@ -57,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:textColor="#444444"
                 android:text="Account Information"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -100,6 +74,7 @@
             <!--This part is for checkboxx-->
             <TextView
                 android:id="@+id/DesiredEventsType"
+                android:textColor="#444444"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -155,12 +130,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Create New Account"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.082"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+               />
 
         </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>
