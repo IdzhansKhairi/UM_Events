@@ -27,7 +27,7 @@ public class CalendarAddEventFragment extends Fragment implements CalendarAdapte
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_event_calendar_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_calendar_add_event, container, false);
         initWidgets(view);
         setWeekView();
 
