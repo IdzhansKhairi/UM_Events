@@ -2,9 +2,9 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:background="@drawable/blue_gradient_umtouch"
-android:elevation="4dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/blue_gradient_umtouch"
+    android:elevation="4dp"
     android:id="@+id/profileTB"
     >
 
@@ -12,16 +12,15 @@ android:elevation="4dp"
         android:id="@+id/switchLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="right">
 
         <TextView
             style="@style/TEXT"
-            android:layout_marginLeft="220dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingEnd="10dp"
+            android:layout_height="wrap_content"
             android:text="Dark Mode"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <Switch
@@ -29,7 +28,6 @@ android:elevation="4dp"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginLeft="0dp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
