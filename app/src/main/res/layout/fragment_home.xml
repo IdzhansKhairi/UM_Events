@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#252525"
+    style="@style/SCREEN"
     tools:context=".HomeFragment">
 
     <include
@@ -16,6 +16,15 @@
         android:layout_gravity="center"
         android:text="HOME PAGE"
         android:textSize="48sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        style="@style/TEXT"/>
+
+    <Button
+        android:id="@+id/buttonTest"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:text="Button" />
+
+
 
 </FrameLayout>

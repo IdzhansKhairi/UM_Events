@@ -1,7 +1,9 @@
 package com.example.um_event;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +13,11 @@ import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -19,6 +26,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private EditText username, password;
     private Spinner credentials;
     private TextView viewUsername, viewPassword, viewCredentials;
+    public static final String SHARED_PREFS = "sharedPrefs";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +35,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_login);
 
         // Fetch information from the registration page.
-        username = (EditText) findViewById(R.id.loginUsername);
-        password = (EditText) findViewById(R.id.loginPassword);
-        credentials = (Spinner) findViewById(R.id.credentials_spinner);
+        username = findViewById(R.id.loginUsername);
+        password =  findViewById(R.id.loginPassword);
+        credentials =  findViewById(R.id.credentials_spinner);
+
+        checkLog();
 
         // This part is for the spinner
         // Getting the instance of Spinner and applying OnItemSelectedListener on it
@@ -40,15 +51,41 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         // Setting the ArrayAdapter data on the Spinner
         spinner.setAdapter(aa);
 
-        // This part is for login button - Go to the home page
+        // This part is for login button
         buttonLogin = (Button) findViewById(R.id.button);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {openHomePage(); }
-        });
+        buttonLogin.setOnClickListener(view -> {
+            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_Credentials");
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    boolean userExist = false;
+                    if (username.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
+                        Toast.makeText(getApplicationContext(),"Please enter your username and password",Toast.LENGTH_SHORT).show();
+                    }else{
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
+                                userExist = true;
+                                if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
+                                    authenticationUser();
+                                }else
+                                    Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
+                            }else{
+                                if (!userExist)
+                                    Toast.makeText(getApplicationContext(),"No Username Found",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            });
 
         // This part is for register button
-        buttonregister = (Button) findViewById(R.id.createAccountButton);
+        buttonregister = findViewById(R.id.createAccountButton);
         buttonregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             // .getSelectedItem() is for fetching the text choosen at the Spinner
             @Override
             public void onClick(View view) {
+                openHomePage();
                 Toast.makeText(getApplicationContext(), "Username : " + username.getText() + "\n" + "Password : " + password.getText() + "\n" + "Credentials : " + spinner.getSelectedItem().toString() +"\n", Toast.LENGTH_LONG).show();
             }
         });
@@ -109,4 +147,25 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
+
+    private void authenticationUser(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("User","true");
+        editor.apply();
+        openHomePage();
+    }
+
+    private void checkLog(){
+        SharedPreferences SP = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        String check = SP.getString("User","No");
+        if(check.equals("true")){
+            Toast.makeText(getApplicationContext(),"Login Successfully",Toast.LENGTH_SHORT).show();
+            openHomePage();
+            finish();
+        }
+    }
+
+
 }

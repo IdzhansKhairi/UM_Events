@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    android:background="#FFFFFF"
+    style="@style/SCREEN"
     tools:context=".ThanksActivity">
 
     <ImageView
@@ -25,7 +25,8 @@
         android:text="THANK YOU"
         android:textAlignment="center"
         android:textSize="60sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        style="@style/TEXT"/>
 
     <TextView
         android:id="@+id/toRegister"
@@ -35,7 +36,8 @@
         android:text="For registering with UM Events"
         android:textAlignment="center"
         android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        style="@style/TEXT"/>
 
     <TextView
         android:id="@+id/tqDisclaimer"
@@ -45,7 +47,7 @@
         android:layout_marginTop="20dp"
         android:text="Just so you know, your application result will be informed through the email you used for registration."
         android:textAlignment="center"
-        android:textColor="#FF0000" />
+        style="@style/TEXT" />
 
     <Button
         android:id="@+id/backToHome"
