@@ -9,4 +9,7 @@
     <string name="date">17 - 18 December 2022</string>
     <string name="website">https://www.comicfiesta.org/</string>
     <string name="set">Set it on calendar so you won’t forget about the event!!!</string>
+    <string name="map_key" translatable="false">AIzaSyCMMgGGF95pOeGx_zPGCvFRNj6EzwVMPrw</string>
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
 </resources>

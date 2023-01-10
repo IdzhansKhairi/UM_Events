@@ -51,6 +51,23 @@ public class SingleEventViewFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_single_event_view, container, false);
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onActivityCreated(savedInstanceState);
+        // get the button view
+        ImageView mapimage = (ImageView) getView().findViewById(R.id.map);
+        // set a onclick listener for when the button gets clicked
+        mapimage.setOnClickListener(new View.OnClickListener() {
+            // Start new list activity
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(getActivity(),
+                        MapFragment.class);
+                startActivity(mainIntent);
+            }
+        });
+    }
+
 
 
 }

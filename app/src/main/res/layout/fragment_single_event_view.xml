@@ -203,7 +203,7 @@
             android:layout_marginBottom="104dp"
             android:scaleType="fitXY"
             android:src="@drawable/mapcomicfiesta"
-            android:onClick="openMap"/>
+            />
     </androidx.cardview.widget.CardView>
 
     <TextView
