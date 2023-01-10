@@ -140,12 +140,7 @@ public class SearchFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(myEventAdapter);
-        myEventAdapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
-            @Override
-            public void onItemCLick(int position) {
-//                myEventAdapter.get(position)
-            }
-        });
+
         return v;
     }
 
