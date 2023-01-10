@@ -13,8 +13,6 @@ import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private Spinner credentials;
     private TextView viewUsername, viewPassword, viewCredentials;
     public static final String SHARED_PREFS = "sharedPrefs";
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         password =  findViewById(R.id.loginPassword);
         credentials =  findViewById(R.id.credentials_spinner);
 
-        checkLog(username.getText().toString());
+        checkLog();
 
         // This part is for the spinner
         // Getting the instance of Spinner and applying OnItemSelectedListener on it
@@ -55,40 +53,36 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         // This part is for login button
         buttonLogin = (Button) findViewById(R.id.button);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_Credentials");
-                db.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        boolean userExist = false;
-                        if (username.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
-                            Toast.makeText(getApplicationContext(),"Please enter your username and password",Toast.LENGTH_SHORT).show();
-                        }else{
-                            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
-                                    userExist = true;
-                                    if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
-                                        authenticationUser(username.getText().toString());
-                                    }else
-                                        Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
-                                }else{
-                                    if (!userExist)
-                                        Toast.makeText(getApplicationContext(),"No Username Found",Toast.LENGTH_LONG).show();
-                                }
+        buttonLogin.setOnClickListener(view -> {
+            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_Credentials");
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    boolean userExist = false;
+                    if (username.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
+                        Toast.makeText(getApplicationContext(),"Please enter your username and password",Toast.LENGTH_SHORT).show();
+                    }else{
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
+                                userExist = true;
+                                if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
+                                    authenticationUser();
+                                }else
+                                    Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
+                            }else{
+                                if (!userExist)
+                                    Toast.makeText(getApplicationContext(),"No Username Found",Toast.LENGTH_LONG).show();
                             }
                         }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
                 }
-        });
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            });
 
         // This part is for register button
         buttonregister = findViewById(R.id.createAccountButton);
@@ -154,20 +148,20 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
 
-    private void authenticationUser(String username){
+    private void authenticationUser(){
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("User",username);
+        editor.putString("User","true");
         editor.apply();
         openHomePage();
     }
 
-    private void checkLog(String username){
+    private void checkLog(){
         SharedPreferences SP = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         String check = SP.getString("User","No");
-        if(check.equals(username)){
-            Toast.makeText(getApplicationContext(),"Login Successfully",Toast.LENGTH_LONG).show();
+        if(check.equals("true")){
+            Toast.makeText(getApplicationContext(),"Login Successfully",Toast.LENGTH_SHORT).show();
             openHomePage();
             finish();
         }
