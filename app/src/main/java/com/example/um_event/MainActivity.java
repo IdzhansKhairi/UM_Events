@@ -17,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String tags;
+
     ActivityMainBinding binding;
 
     @Override

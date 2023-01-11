@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".OrganizerAddFragment">
+    tools:context=".OrganizerAddFragment"
+    android:background="@color/white">
 
     <include
         android:id="@+id/toolbar"
@@ -44,6 +45,8 @@
                 android:textSize="36sp" />
 
             <EditText
+                android:background="@drawable/rounded_coner"
+                android:padding="10dp"
                 android:id="@+id/EventNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,6 +72,8 @@
                 android:textSize="36sp" />
 
             <EditText
+                android:background="@drawable/rounded_coner"
+                android:padding="10dp"
                 android:id="@+id/EventVenueEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,6 +114,8 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:background="@drawable/rounded_coner"
+                    android:padding="10dp"
                     android:id="@+id/EventDateStartEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,6 +137,8 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:background="@drawable/rounded_coner"
+                    android:padding="10dp"
                     android:id="@+id/EventEndDateEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -167,6 +176,8 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:background="@drawable/rounded_coner"
+                    android:padding="10dp"
                     android:id="@+id/EventStartTimeEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -188,6 +199,8 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:background="@drawable/rounded_coner"
+                    android:padding="10dp"
                     android:id="@+id/EventEndTimeEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -214,6 +227,8 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:background="@drawable/rounded_coner"
+                    android:padding="10dp"
                     android:id="@+id/EventDetailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -237,6 +252,8 @@
                 android:textSize="36sp" />
 
             <ImageView
+                android:background="@drawable/rounded_coner"
+                android:padding="10dp"
                 android:id="@+id/EventImageEditText"
                 android:layout_width="match_parent"
                 android:layout_height="247dp"

@@ -2,6 +2,7 @@ package com.example.um_event;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,6 +111,7 @@ public class HomeFragment extends Fragment {
         myEventData = new ArrayList<>();
         myEventAdapter = new HomeAdapter(myEventData,getActivity());
 
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference database = db.getReference("Event_Node");
         database.addValueEventListener(new ValueEventListener() {
@@ -118,7 +120,16 @@ public class HomeFragment extends Fragment {
                 //get data from database and insert into a new EventData object
                 for (DataSnapshot dataSnapshot :snapshot.getChildren() ){
                     EventData getData = dataSnapshot.getValue(EventData.class);
-                    myEventData.add(getData);
+
+
+
+                    if(getData.getEventCategory().contains(LoginActivity.tag)){
+
+                        myEventData.add(getData);
+
+                    }
+
+
                 }
                 myEventAdapter.notifyDataSetChanged();
             }
@@ -136,5 +147,17 @@ public class HomeFragment extends Fragment {
         });
 
         return v;
-    }}
+    }
+
+//    private void filter(EventData getData) {
+//
+//        String tag = MainActivity.tags;
+//
+//        if(getData.getEventCategory().contains(tag)){
+//
+//
+//
+//        }
+//    }
+}
 

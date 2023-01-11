@@ -87,6 +87,10 @@ public class HomeOrganizerFragment extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
+//        filter
+
+
+
 //      organizer recycler
         RecyclerView recyclerView = v.findViewById(R.id.HomeOrganizerEventRecylerview);
         recyclerView.setHasFixedSize(true);
@@ -129,6 +133,23 @@ public class HomeOrganizerFragment extends Fragment {
             }
         });
 
+        ImageView backBtn = v.findViewById(R.id.BackBtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Frame_Layout, new HomeFragment());
+                fragmentTransaction.commit();
+
+            }
+        });
+
         return v;
-    }}
+    }
+
+
+}
 

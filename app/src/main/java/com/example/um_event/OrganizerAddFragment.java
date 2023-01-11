@@ -106,6 +106,22 @@ public class OrganizerAddFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_organizer_add, container, false);
 
+//        backButton
+        ImageView backBtn = v.findViewById(R.id.HomeOragnizerBtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Frame_Layout, new HomeOrganizerFragment());
+                fragmentTransaction.commit();
+
+            }
+        });
+
+
 //        image collecter
 
         eventImageEditText = v.findViewById(R.id.EventImageEditText);

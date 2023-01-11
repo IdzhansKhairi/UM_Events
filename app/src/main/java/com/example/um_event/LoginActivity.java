@@ -27,12 +27,16 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private Spinner credentials;
     private TextView viewUsername, viewPassword, viewCredentials;
     public static final String SHARED_PREFS = "sharedPrefs";
+    public static  final String DESIRED = "Desired";
+    public static String tag;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         // Fetch information from the registration page.
         username = findViewById(R.id.loginUsername);
@@ -56,6 +60,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         buttonLogin.setOnClickListener(view -> {
             DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_Credentials");
             db.addValueEventListener(new ValueEventListener() {
+
+
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     boolean userExist = false;
@@ -64,9 +70,10 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     }else{
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                             if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
+
                                 userExist = true;
                                 if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
-                                    authenticationUser();
+                                    authenticationUser(dataSnapshot.child("desiredEvent").getValue().toString());
                                 }else
                                     Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
                             }else{
@@ -118,6 +125,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
     // Methods for go to home page
     public void openHomePage() {
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -130,11 +138,12 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
 
-    private void authenticationUser(){
+    private void authenticationUser(String desired){
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("User","true");
+        editor.putString(DESIRED,"Talk");
         editor.apply();
         openHomePage();
     }
@@ -142,6 +151,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private void checkLog(){
         SharedPreferences SP = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         String check = SP.getString("User","No");
+        tag = SP.getString(DESIRED,"");
         if(check.equals("true")){
             Toast.makeText(getApplicationContext(),"Login Successfully",Toast.LENGTH_SHORT).show();
             openHomePage();
