@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,11 +16,18 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class SettingClientFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final String SHARED_PREFS = "sharedPrefs";
+
 
     private String mParam1;
     private String mParam2;
@@ -28,7 +36,7 @@ public class SettingClientFragment extends Fragment {
     private boolean nightMODE;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private TextView stat;
+    private TextView stat, userId, phone, email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,10 +71,71 @@ public class SettingClientFragment extends Fragment {
             }
         });
 
+        SharedPreferences sp1 = getActivity().getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+        String IDorg = sp1.getString("ID","NOPE");
+        String desiredEvent = sp1.getString("Desired","NAH");
+
         stat = view.findViewById(R.id.status);
+        userId = view.findViewById(R.id.profileName);
+        phone = view.findViewById(R.id.phoneTV);
+        email = view.findViewById(R.id.emailTV);
         if (LoginActivity.statusAcc.equals("Students")){
         stat.setText("Logged in as a Student");
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users_Credentials");
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                        if (dataSnapshot.child("desiredEvent").getValue().toString().equals(desiredEvent)){
+                            String matricNo = dataSnapshot.child("matricNumber").getValue().toString();
+                            DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference().child("Student_Info").child(matricNo);
+                            ref2.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    userId.setText(snapshot.child("fullName").getValue().toString());
+                                    email.setText(snapshot.child("siswamail").getValue().toString());
+                                    phone.setText(matricNo);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }else {
+            DatabaseReference ref3 = FirebaseDatabase.getInstance().getReference("Organizers_Credentials");
+            ref3.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                        if (dataSnapshot.child("organizerID").getValue().toString().equals(IDorg)){
+                            userId.setText(IDorg);
+                            email.setText(dataSnapshot.child("email").getValue().toString());
+                            phone.setText(dataSnapshot.child("phoneNo").getValue().toString());
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
+
 
         // Sign Out Button Stuff
         Button signOutButton = view.findViewById(R.id.signOutBtn);

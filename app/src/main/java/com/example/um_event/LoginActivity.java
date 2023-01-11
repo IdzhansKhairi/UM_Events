@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                                 if (dataSnapshot.child("organizerID").getValue().toString().equals(username.getText().toString())){
                                     userExist = true;
                                     if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
-                                        authenticationOrg();
+                                        authenticationOrg(username.getText().toString());
                                     }else
                                         Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
                                 }else{
@@ -180,10 +180,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         openHomePage();
     }
 
-    private void authenticationOrg(){
+    private void authenticationOrg(String orgID){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("User","true");
+        editor.putString("ID",orgID);
         editor.putString("AccType",spinner.getSelectedItem().toString());
         editor.apply();
         openHomePage();
