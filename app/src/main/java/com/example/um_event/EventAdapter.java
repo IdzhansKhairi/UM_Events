@@ -1,18 +1,20 @@
 package com.example.um_event;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,14 +22,6 @@ import java.util.ArrayList;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
-    OnItemClickListener mlistener;
-    public interface OnItemClickListener{
-        void onItemCLick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mlistener = listener;
-    }
 
 
     ArrayList<EventData> myEventData;
@@ -44,7 +38,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.cardview,parent,false);
-        ViewHolder viewHolder = new ViewHolder(view,mlistener);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
@@ -53,16 +47,26 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         EventData eventData = myEventData.get(position);
         holder.TVName.setText(eventData.getEventName());
+        holder.TVName.setTextColor(Color.parseColor("#222222"));
         holder.TVDate.setText(eventData.getEventDate());
+        holder.TVDate.setTextColor(Color.parseColor("#222222"));
         holder.TVTime.setText(eventData.getEventTime());
+        holder.TVTime.setTextColor(Color.parseColor("#222222"));
         holder.TVVenue.setText(eventData.getEventVenue());
+        holder.TVVenue.setTextColor(Color.parseColor("#222222"));
         holder.movieImage.setImageBitmap(convertImage(eventData.getEventImage()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // System.out.println(" IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN ");
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                SingleEventViewFragment open = new SingleEventViewFragment();
 
+                Bundle bundle = new Bundle();
+                bundle.putString("EventName",holder.TVName.getText().toString());
+                open.setArguments(bundle);
+
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.Frame_Layout,open).addToBackStack(null).commit();
             }
         });
     }
@@ -77,25 +81,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         ImageView movieImage;
         TextView TVName, TVDate,TVTime, TVVenue;
 
-        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             movieImage = itemView.findViewById(R.id.eventImage);
             TVName = itemView.findViewById(R.id.name_label);
             TVDate = itemView.findViewById(R.id.date_label);
             TVTime = itemView.findViewById(R.id.time_label);
             TVVenue = itemView.findViewById(R.id.venue_label);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener!=null){
-                        int position = getAdapterPosition();
-                        if (position!= RecyclerView.NO_POSITION){
-                            listener.onItemCLick(position);
-                        }
-                    }
-                }
-            });
         }
     }
 
@@ -110,5 +102,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         myEventData = filteredList;
         notifyDataSetChanged();
     }
+
+
+
 
 }
