@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.metrics.Event;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
     OnItemClickListener mlistener;
+
     public interface OnItemClickListener{
         void onItemCLick(int position);
     }

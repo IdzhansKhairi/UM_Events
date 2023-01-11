@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SCREEN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/SCREEN"
+    android:background="#252525"
     android:orientation="vertical"
     tools:context=".CalendarFragment">
 
-
-    <Button
-        android:id="@+id/weekly_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@null"
-        android:onClick="weeklyAction"
-        android:text="Add Event"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,12 +31,13 @@
 
         <TextView
             android:id="@+id/monthYearTV"
+            style="@style/TEXT"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Feb 2021"
             android:textAlignment="center"
-            style="@style/TEXT"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <Button
@@ -140,6 +129,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="365dp" />
+        android:layout_height="488dp" />
 
 </LinearLayout>

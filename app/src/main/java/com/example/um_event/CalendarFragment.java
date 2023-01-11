@@ -7,31 +7,51 @@ import androidx.fragment.app.Fragment;
 //import androidx.navigation.Navigation;
 //import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.media.metrics.Event;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.example.um_event.CalendarUtils.daysInMonthArray;
 import static com.example.um_event.CalendarUtils.monthYearFromDate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener{
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
+    private ListView calendarEventListView;
+    private ArrayAdapter<String> adapter;
+
+    private DatabaseReference myRef;
+
+
     //private NavController navController;
     //FragmentCalendarBinding binding;
+
+    public CalendarFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +61,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             CalendarUtils.selectedDate = LocalDate.now();
         }
         setMonthView();
+
         Button previousMonthButton = view.findViewById(R.id.previous_month_button);
         previousMonthButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,16 +90,13 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             }
         });*/
 
-
-
-
-        Button weeklyButton = view.findViewById(R.id.weekly_button);
+/*        Button weeklyButton = view.findViewById(R.id.weekly_button);
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 weeklyAction(view);
             }
-        });
+        });*/
 /*
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
         binding.weeklyButton.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +150,28 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
+
+   /* private void setEventView(){
+        myRef = FirebaseDatabase.getInstance().getReference().child("Event_Node");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                CalendarEvents2 newEvent = null;
+                for (DataSnapshot itemSnap : dataSnapshot.getChildren()) {
+                    String eventName = dataSnapshot.child("eventName").getValue().toString();
+                    String eventDate = dataSnapshot.child("eventDate").getValue().toString();
+                    newEvent = new CalendarEvents2(eventName, eventDate);
+                }
+                CalendarEvents2.eventsList2.add(newEvent);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+        CalendarEventAdapter eventAdapter = new CalendarEventAdapter(getContext(), );
+        calendarEventListView.setAdapter(eventAdapter);
+    }*/
 
     @Override
     public void onItemClick(int position, LocalDate date) {
