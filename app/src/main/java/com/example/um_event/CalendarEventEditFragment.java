@@ -21,6 +21,10 @@ public class CalendarEventEditFragment extends Fragment
 
     private LocalTime time;
 
+    public CalendarEventEditFragment() {
+        // Required empty public constructor
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar_event_edit, container, false);
