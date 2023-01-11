@@ -63,7 +63,14 @@ public class RegisterOrganizerActivity extends AppCompatActivity {
     private void senEmail() {
         String memail = "codertestingemail@gmail.com";
         String msubject = "Organizer's Registration";
-        String mtext = "";
+        String organizerName, organizerEmail, organizerPhone, organizerUsername, organizerPassword, organizerConPassword;
+        organizerName = this.orgName.getText().toString();
+        organizerEmail = this.email.getText().toString();
+        organizerPhone = this.orgPhone.getText().toString();
+        organizerUsername = this.username.getText().toString();
+        organizerPassword = this.password.getText().toString();
+        organizerConPassword = this.conPassword.getText().toString();
+        String mtext = "ORGANIZER INFORMATION\nOrganizer Name : " + organizerName + "\nOrganizer Email : " + organizerEmail + "\nOrganizer Phone Number : " + organizerPhone + "\n\nACCOUNT INFORMATION\n" + "Username : " + organizerUsername + "\nPassword : " + organizerPassword + "\nOrganizer Confirmation Password : " + organizerConPassword;
 
         JavaMailAPI javaMailAPI = new JavaMailAPI(this, memail, msubject, mtext);
         javaMailAPI.execute();
