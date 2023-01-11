@@ -42,6 +42,7 @@ public class RegisterOrganizerActivity extends AppCompatActivity {
         organizerRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                senEmail();
                 thankYouRegister();
             }
         });
@@ -57,5 +58,14 @@ public class RegisterOrganizerActivity extends AppCompatActivity {
     public void thankYouRegister() {
         Intent intent = new Intent(this, ThanksActivity.class);
         startActivity(intent);
+    }
+
+    private void senEmail() {
+        String memail = "codertestingemail@gmail.com";
+        String msubject = "Organizer's Registration";
+        String mtext = "";
+
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this, memail, msubject, mtext);
+        javaMailAPI.execute();
     }
 }
