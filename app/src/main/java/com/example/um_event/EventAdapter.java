@@ -2,6 +2,7 @@ package com.example.um_event;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -36,7 +37,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.cardview,parent,false);
+        View view = layoutInflater.inflate(R.layout.card_home_item,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -46,9 +47,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         EventData eventData = myEventData.get(position);
         holder.TVName.setText(eventData.getEventName());
+        holder.TVName.setTextColor(Color.parseColor("#222222"));
         holder.TVDate.setText(eventData.getEventDate());
+        holder.TVDate.setTextColor(Color.parseColor("#222222"));
         holder.TVTime.setText(eventData.getEventTime());
+        holder.TVTime.setTextColor(Color.parseColor("#222222"));
         holder.TVVenue.setText(eventData.getEventVenue());
+        holder.TVVenue.setTextColor(Color.parseColor("#222222"));
         holder.movieImage.setImageBitmap(convertImage(eventData.getEventImage()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +64,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
                 Bundle bundle = new Bundle();
                 bundle.putString("EventName",holder.TVName.getText().toString());
+                open.setArguments(bundle);
 
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.Frame_Layout,open).addToBackStack(null).commit();
             }

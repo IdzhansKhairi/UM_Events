@@ -2,14 +2,16 @@ package com.example.um_event;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,21 +19,8 @@ import java.util.ArrayList;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
-    OnItemClickListener mlistener;
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        mlistener = onItemClickListener;
-    }
-
-    public interface OnItemClickListener{
-        void onItemCLick(int position);
-    }
-
-
-
-
     ArrayList<EventData> myEventData;
-    //EventData[] myEventData;
+
     FragmentActivity activity;
     //constructor
     public HomeAdapter(ArrayList<EventData> myEventData, FragmentActivity activity) {
@@ -44,7 +33,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.card_home_item,parent,false);
-        HomeAdapter.ViewHolder viewHolder = new ViewHolder(view,mlistener);
+        HomeAdapter.ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
@@ -54,15 +43,26 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         EventData eventData = myEventData.get(position);
 
         holder.homeEventName.setText(eventData.getEventName());
+        holder.homeEventName.setTextColor(Color.parseColor("#222222"));
         holder.homeEventDate.setText(eventData.getEventDate());
+        holder.homeEventName.setTextColor(Color.parseColor("#222222"));
         holder.homeEventTime.setText(eventData.getEventTime());
+        holder.homeEventName.setTextColor(Color.parseColor("#222222"));
         holder.homeEventVenue.setText(eventData.getEventVenue());
+        holder.homeEventName.setTextColor(Color.parseColor("#222222"));
         holder.homeEventImage.setImageBitmap(convertImage(eventData.getEventImage()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // System.out.println(" IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN IMAN ");
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                SingleEventViewFragment open = new SingleEventViewFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("EventName",holder.homeEventName.getText().toString());
+                open.setArguments(bundle);
+
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.Frame_Layout,open).addToBackStack(null).commit();
 
             }
         });
@@ -80,26 +80,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         ImageView homeEventImage;
         TextView homeEventName,homeEventTime,homeEventDate,homeEventVenue;
 
-        public ViewHolder(@NonNull View itemView,OnItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            homeEventImage = itemView.findViewById(R.id.HomeEventImage);
-            homeEventName = itemView.findViewById(R.id.HomeEventName);
-            homeEventTime = itemView.findViewById(R.id.HomeEventTime);
-            homeEventDate = itemView.findViewById(R.id.HomeEventDate);
-            homeEventVenue = itemView.findViewById(R.id.HomeEventVenue);
+            homeEventImage = itemView.findViewById(R.id.eventImage);
+            homeEventName = itemView.findViewById(R.id.name_label);
+            homeEventTime = itemView.findViewById(R.id.time_label);
+            homeEventDate = itemView.findViewById(R.id.date_label);
+            homeEventVenue = itemView.findViewById(R.id.venue_label);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener!=null){
-                        int position = getAdapterPosition();
-                        if (position!= RecyclerView.NO_POSITION){
-                            listener.onItemCLick(position);
-                        }
-                    }
-                }
-            });
 
         }
     }
@@ -113,7 +102,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
     }
 
-    public void filterList(ArrayList<EventData> filteredList){
+    public void filterDesiredList(ArrayList<EventData> filteredList){
         myEventData = filteredList;
         notifyDataSetChanged();
     }

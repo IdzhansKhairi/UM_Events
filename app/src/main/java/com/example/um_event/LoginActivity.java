@@ -36,8 +36,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
         // Fetch information from the registration page.
         username = findViewById(R.id.loginUsername);
         password =  findViewById(R.id.loginPassword);
@@ -60,8 +58,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         buttonLogin.setOnClickListener(view -> {
             DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_Credentials");
             db.addValueEventListener(new ValueEventListener() {
-
-
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     boolean userExist = false;
@@ -70,7 +66,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     }else{
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                             if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
-
                                 userExist = true;
                                 if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
                                     authenticationUser(dataSnapshot.child("desiredEvent").getValue().toString());
@@ -125,7 +120,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
     // Methods for go to home page
     public void openHomePage() {
-
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -143,7 +137,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("User","true");
-        editor.putString(DESIRED,"Talk");
+        editor.putString(DESIRED,desired);
         editor.apply();
         openHomePage();
     }

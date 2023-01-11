@@ -2,7 +2,6 @@ package com.example.um_event;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +31,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    public static final String SHARED_PREFS = "sharedPrefs";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -111,6 +112,7 @@ public class HomeFragment extends Fragment {
         myEventData = new ArrayList<>();
         myEventAdapter = new HomeAdapter(myEventData,getActivity());
 
+        System.out.println(LoginActivity.tag + "here");
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference database = db.getReference("Event_Node");
@@ -121,9 +123,10 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot dataSnapshot :snapshot.getChildren() ){
                     EventData getData = dataSnapshot.getValue(EventData.class);
 
+//                    SharedPreferences sp = getActivity().getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+//                    String desired = sp.getString("Desired","");
 
-
-                    if(getData.getEventCategory().contains(LoginActivity.tag)){
+                    if((getData.getEventCategory()).contains(LoginActivity.tag )){
 
                         myEventData.add(getData);
 
@@ -139,25 +142,13 @@ public class HomeFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(myEventAdapter);
-        myEventAdapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemCLick(int position) {
-//                myEventAdapter.get(position)
-            }
-        });
+//        myEventAdapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemCLick(int position) {
+////                myEventAdapter.get(position)
+//            }
+//        });
 
         return v;
-    }
-
-//    private void filter(EventData getData) {
-//
-//        String tag = MainActivity.tags;
-//
-//        if(getData.getEventCategory().contains(tag)){
-//
-//
-//
-//        }
-//    }
-}
+    }}
 
