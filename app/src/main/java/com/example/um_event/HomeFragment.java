@@ -34,6 +34,8 @@ public class HomeFragment extends Fragment {
 
     ArrayList<EventData> myEventData;
     HomeAdapter myEventAdapter;
+    public static final  String Prefs_user = "LoginDesire";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +47,11 @@ public class HomeFragment extends Fragment {
         if (nightMODE) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
+
+        SharedPreferences sw1 = getActivity().getSharedPreferences(Prefs_user,Context.MODE_PRIVATE);
+        String username = sw1.getString("Desire", "");
+
+
 
         ImageView organizerBtn;
 

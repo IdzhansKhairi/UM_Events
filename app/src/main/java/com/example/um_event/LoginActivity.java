@@ -21,12 +21,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    private Button buttonregister, buttonLogin, buttonregisterOrganiser, buttonTest;
+    private Button buttonregister, buttonLogin, buttonregisterOrganiser;
     private String[] credential = {"Students", "Organizers"};
     private EditText username, password;
     private Spinner credentials;
     private TextView viewUsername, viewPassword, viewCredentials;
     public static final String SHARED_PREFS = "sharedPrefs";
+    public static final  String Prefs_user = "LoginDesire";
 
 
     @Override
@@ -38,7 +39,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         username = findViewById(R.id.loginUsername);
         password =  findViewById(R.id.loginPassword);
         credentials =  findViewById(R.id.credentials_spinner);
-
+        SharedPreferences sw1 = getSharedPreferences(Prefs_user,MODE_PRIVATE);
+        String gg = sw1.getString("Desire", "");
+        System.out.println("HERE: "+ gg);
         checkLog();
 
         // This part is for the spinner
@@ -66,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                             if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
                                 userExist = true;
                                 if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
-                                    authenticationUser();
+                                    authenticationUser(username.getText().toString());
                                 }else
                                     Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
                             }else{
@@ -130,12 +133,16 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
 
-    private void authenticationUser(){
+    private void authenticationUser(String username){
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("User","true");
         editor.apply();
+        SharedPreferences SP2 = getSharedPreferences(Prefs_user,MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = SP2.edit();
+        editor2.putString("Desire",username);
+        editor2.apply();
         openHomePage();
     }
 
