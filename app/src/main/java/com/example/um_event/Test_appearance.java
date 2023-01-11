@@ -69,7 +69,7 @@ public class Test_appearance extends Fragment {
         }
     }
 
-    private EditText Name, MatricNumber;
+    private EditText orgID, pass, email, phone;
     private Button sbmtBtn;
     private ImageView getImage;
 
@@ -79,9 +79,11 @@ public class Test_appearance extends Fragment {
         View v = inflater.inflate(R.layout.fragment_test_appearance, container, false);
 
         sbmtBtn = v.findViewById(R.id.submitBtn);
-        Name = v.findViewById(R.id.fullname_get);
-        MatricNumber = v.findViewById(R.id.matricNumber_get);
-        getImage = v.findViewById(R.id.convertImg);
+        orgID = v.findViewById(R.id.get_org_id);
+        pass = v.findViewById(R.id.getPassword);
+        email = v.findViewById(R.id.get_email);
+        phone = v.findViewById(R.id.getPhoneNo);
+        //getImage = v.findViewById(R.id.convertImg);
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
@@ -89,14 +91,16 @@ public class Test_appearance extends Fragment {
             @Override
             public void onClick(View v) {
                 ////////////////////////////////////////////////////////
-                if(Name.getText().toString().isEmpty() || MatricNumber.getText().toString().isEmpty()){
+                if(orgID.getText().toString().isEmpty() || pass.getText().toString().isEmpty() ||email.getText().toString().isEmpty()||
+                        phone.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Please Fill All Blanks", Toast.LENGTH_LONG).show();
                 }else{
                     try {
-                        StudentData insertNew = new StudentData(Name.getText().toString(),unifyMatricNo(MatricNumber.getText().toString()) ,
-                                createSiswamail(MatricNumber.getText().toString()));
-                        DatabaseReference StudentInfo = db.getReference("Student_Info");
-                        StudentInfo.child(MatricNumber.getText().toString()).setValue(insertNew);
+                        OrganizerData orgData = new OrganizerData(orgID.getText().toString(),pass.getText().toString(),
+                                email.getText().toString(),phone.getText().toString());
+
+                        DatabaseReference OrgData = db.getReference("Organizers_Credentials");
+                        OrgData.child(orgID.getText().toString()).setValue(orgData);
                     }catch (Exception e){
                         e.printStackTrace();
                     }

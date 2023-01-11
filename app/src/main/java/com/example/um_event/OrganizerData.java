@@ -5,9 +5,9 @@ public class OrganizerData {
     private String OrganizerID;
     private String Password;
     private String Email;
-    private int PhoneNo;
+    private String PhoneNo;
 
-    public OrganizerData(String organizerID, String password, String email, int phoneNo) {
+    public OrganizerData(String organizerID, String password, String email, String phoneNo) {
         this.OrganizerID = organizerID;
         this.Password = password;
         this.Email = email;
@@ -38,11 +38,11 @@ public class OrganizerData {
         Email = email;
     }
 
-    public int getPhoneNo() {
+    public String getPhoneNo() {
         return PhoneNo;
     }
 
-    public void setPhoneNo(int phoneNo) {
+    public void setPhoneNo(String phoneNo) {
         PhoneNo = phoneNo;
     }
 }

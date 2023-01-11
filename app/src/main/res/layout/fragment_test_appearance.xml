@@ -12,18 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:text="Name:" />
+        android:text="Organizer ID:" />
 
     <EditText
         android:textColor="@android:color/white"
-        android:id="@+id/fullname_get"
+        android:id="@+id/get_org_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:hint="Enter your name"
+        android:hint="Enter your ID"
         android:textColorHint="@android:color/darker_gray"/>
-
-
 
 
     <TextView
@@ -31,17 +29,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:text="Matric Number:" />
+        android:text="Password:" />
 
     <EditText
         android:textColor="@android:color/white"
-        android:id="@+id/matricNumber_get"
+        android:id="@+id/getPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:hint="Enter your Matric Number"
+        android:hint="Enter your password "
         android:textColorHint="@android:color/darker_gray"/>
 
+    <TextView
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Email:" />
+
+    <EditText
+        android:textColor="@android:color/white"
+        android:id="@+id/get_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:hint="Enter your email "
+        android:textColorHint="@android:color/darker_gray"/>
+
+    <TextView
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Phone No.:" />
+
+    <EditText
+        android:textColor="@android:color/white"
+        android:id="@+id/getPhoneNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:hint="Enter your phone number "
+        android:textColorHint="@android:color/darker_gray"/>
     <Button
 
         android:id="@+id/submitBtn"
@@ -54,7 +83,7 @@
     <ImageView
         android:id="@+id/convertImg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:src="@drawable/octaverse"/>
 
 </LinearLayout>

@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                                 if (dataSnapshot.child("organizerID").getValue().toString().equals(username.getText().toString())){
                                     userExist = true;
                                     if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
-                                       // authenticationUser(dataSnapshot.child("desiredEvent").getValue().toString());
+                                        authenticationOrg();
                                     }else
                                         Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
                                 }else{
@@ -175,6 +175,15 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("User","true");
         editor.putString("Desired",desire);
+        editor.putString("AccType",spinner.getSelectedItem().toString());
+        editor.apply();
+        openHomePage();
+    }
+
+    private void authenticationOrg(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("User","true");
         editor.putString("AccType",spinner.getSelectedItem().toString());
         editor.apply();
         openHomePage();
