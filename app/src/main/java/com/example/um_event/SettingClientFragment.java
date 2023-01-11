@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 
 public class SettingClientFragment extends Fragment {
 
@@ -27,6 +28,7 @@ public class SettingClientFragment extends Fragment {
     private boolean nightMODE;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private TextView stat;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +62,11 @@ public class SettingClientFragment extends Fragment {
                 editor.apply();
             }
         });
+
+        stat = view.findViewById(R.id.status);
+        if (LoginActivity.statusAcc.equals("Students")){
+        stat.setText("Logged in as a Student");
+        }
 
         // Sign Out Button Stuff
         Button signOutButton = view.findViewById(R.id.signOutBtn);
