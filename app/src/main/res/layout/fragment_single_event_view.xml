@@ -5,206 +5,217 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#252525"
     tools:context=".SingleEventViewFragment">
 
     <include layout="@layout/event_view_toolbar"/>
 
-    <ImageView
-        android:id="@+id/eventDisplayImg"
-        android:layout_width="match_parent"
-        android:layout_height="235dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/comic_fiesta"
-        android:layout_below= "@+id/eventTB" />
 
-    <ImageView
-        android:id="@+id/whiteline"
-        android:layout_width="350dp"
-        android:layout_height="2dp"
-        android:layout_below="@id/eventDisplayImg"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/line_bg"
-        />
+            <ImageView
+                android:id="@+id/eventDisplayImg"
+                android:layout_width="match_parent"
+                android:layout_height="235dp"
+                android:layout_marginTop="55dp"
+                android:src="@drawable/comic_fiesta" />
 
-    <TextView
-        android:id="@+id/eventDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/kadwa"
-        android:text="@string/SEV2"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:layout_below="@id/eventDisplayImg"/>
+            <ImageView
+                android:id="@+id/whiteline"
+                android:layout_width="350dp"
+                android:layout_height="2dp"
+                android:layout_below="@id/eventDisplayImg"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/line_bg"
+                />
 
-    <ImageView
-        android:id="@+id/whiteline2"
-        android:layout_width="350dp"
-        android:layout_height="2dp"
-        android:layout_below="@id/eventDesc"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/line_bg" />
-
-    <ImageView
-        android:id="@+id/detail_bag"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/eventDesc"
-        android:layout_marginTop="10dp"
-        android:paddingHorizontal="5dp"
-        android:src="@drawable/detail_bg" />
-
-    <ImageView
-        android:id="@+id/ic_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_calendar"
-        android:layout_below="@id/eventDesc"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="25dp"
-        />
-
-    <TextView
-        android:id="@+id/TVdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/kadwa"
-        android:text="@string/date"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        android:layout_below="@id/eventDesc"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/ic_calendar"/>
-
-
-    <ImageView
-        android:id="@+id/ic_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_time"
-        android:layout_toRightOf="@id/TVdate"
-        android:layout_below="@id/eventDesc"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="80dp"/>
-
-    <TextView
-        android:id="@+id/TVtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/eventDesc"
-        android:layout_toRightOf="@+id/ic_time"
-        android:fontFamily="@font/kadwa"
-        android:text="@string/time"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="8dp"
-        />
-
-
-    <ImageView
-        android:id="@+id/ic_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_location"
-        android:layout_below="@+id/ic_calendar"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="23dp"/>
-
-
-    <TextView
-        android:id="@+id/TVlocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/TVtime"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="19dp"
-        android:fontFamily="@font/kadwa"
-        android:text="@string/location"
-        android:textSize="13sp"
-        android:layout_toRightOf="@id/ic_location"
-        android:textStyle="bold" />
-
-
-        <ImageView
-            android:layout_below="@id/detail_bag"
-            android:id="@+id/map"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:layout_marginTop="8dp"
-            android:paddingHorizontal="5dp"
-            android:src="@drawable/mapcomicfiesta"
-            />
+            android:layout_height="130dp"
+            android:layout_below="@id/whiteline"
+            android:id="@+id/SCLayout">
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:button="@drawable/selector_wishlist_item"
-        android:layout_below="@id/map"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp"
-        />
+                <TextView
+                    android:id="@+id/eventDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/kadwa"
+                    android:text="@string/SEV2"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_below="@id/eventDisplayImg"/>
+        
+        </ScrollView>
+        
 
-    <TextView
-        android:id="@+id/next_to_heart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/checkBox"
-        android:layout_below="@id/map"
-        android:fontFamily="@font/kadwa"
-        android:text="@string/set"
-        android:layout_marginTop="9dp"
-        android:layout_marginLeft="3dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        />
+            <ImageView
+                android:id="@+id/whiteline2"
+                android:layout_width="350dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/SCLayout"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/line_bg" />
 
-    <TextView
-        android:id="@+id/tags"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/checkBox"
-        android:layout_marginLeft="15dp"
-        android:fontFamily="@font/kadwa"
-        android:layout_marginTop="10dp"
-        android:text="Tags: "
-        android:textColor="@color/white"
-        android:textStyle="bold"
-         />
+            <ImageView
+                android:id="@+id/detail_bag"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/SCLayout"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="5dp"
+                android:src="@drawable/detail_bg" />
 
-    <ImageView
-        android:id="@+id/tag_bg"
-        android:layout_width="340dp"
-        android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/tags"
-        android:layout_marginLeft="6dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/tag_bg"
-         />
+            <ImageView
+                android:id="@+id/ic_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar"
+                android:layout_below="@id/SCLayout"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="25dp"
+                />
+
+            <TextView
+                android:id="@+id/TVdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kadwa"
+                android:text="@string/date"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_below="@id/SCLayout"
+                android:layout_marginTop="27dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/ic_calendar"/>
 
 
-    <TextView
-        android:id="@+id/tag_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/kadwa"
-        android:text="Carnival"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/tags"
-        android:layout_below="@id/next_to_heart"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="14sp"
-       />
+            <ImageView
+                android:id="@+id/ic_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_time"
+                android:layout_toRightOf="@id/TVdate"
+                android:layout_below="@id/SCLayout"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="80dp"/>
+
+            <TextView
+                android:id="@+id/TVtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/SCLayout"
+                android:layout_toRightOf="@+id/ic_time"
+                android:fontFamily="@font/kadwa"
+                android:text="@string/time"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginTop="27dp"
+                android:layout_marginLeft="8dp"
+                />
+
+
+            <ImageView
+                android:id="@+id/ic_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_location"
+                android:layout_below="@+id/ic_calendar"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="23dp"/>
+
+
+            <TextView
+                android:id="@+id/TVlocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/TVtime"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="19dp"
+                android:fontFamily="@font/kadwa"
+                android:text="@string/location"
+                android:textSize="13sp"
+                android:layout_toRightOf="@id/ic_location"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:layout_below="@id/detail_bag"
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="5dp"
+                android:src="@drawable/mapcomicfiesta"
+                />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:button="@drawable/selector_wishlist_item"
+                android:layout_above="@id/tags"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                />
+
+            <TextView
+                android:id="@+id/next_to_heart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/checkBox"
+                android:layout_above="@id/tags"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/kadwa"
+                android:text="@string/set"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/kadwa"
+                android:layout_marginBottom="14dp"
+                android:text="Tags: "
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:id="@+id/tag_bg"
+                android:layout_width="340dp"
+                android:layout_height="35dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/tags"
+                android:layout_marginLeft="6dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/tag_bg"
+                />
+
+
+            <TextView
+                android:id="@+id/tag_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kadwa"
+                android:text="Carnival"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/tags"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="13dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp"
+                />
 
 </RelativeLayout>

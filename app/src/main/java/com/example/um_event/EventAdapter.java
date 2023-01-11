@@ -2,6 +2,7 @@ package com.example.um_event;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -46,9 +47,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         EventData eventData = myEventData.get(position);
         holder.TVName.setText(eventData.getEventName());
+        holder.TVName.setTextColor(Color.parseColor("#222222"));
         holder.TVDate.setText(eventData.getEventDate());
+        holder.TVDate.setTextColor(Color.parseColor("#222222"));
         holder.TVTime.setText(eventData.getEventTime());
+        holder.TVTime.setTextColor(Color.parseColor("#222222"));
         holder.TVVenue.setText(eventData.getEventVenue());
+        holder.TVVenue.setTextColor(Color.parseColor("#222222"));
         holder.movieImage.setImageBitmap(convertImage(eventData.getEventImage()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
