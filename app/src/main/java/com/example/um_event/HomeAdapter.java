@@ -32,7 +32,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     @Override
     public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.card_home_item,parent,false);
+        View view = layoutInflater.inflate(R.layout.cardview,parent,false);
         HomeAdapter.ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -83,11 +83,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            homeEventImage = itemView.findViewById(R.id.HomeEventImage);
-            homeEventName = itemView.findViewById(R.id.HomeEventName);
-            homeEventTime = itemView.findViewById(R.id.HomeEventTime);
-            homeEventDate = itemView.findViewById(R.id.HomeEventDate);
-            homeEventVenue = itemView.findViewById(R.id.HomeEventVenue);
+            homeEventImage = itemView.findViewById(R.id.eventImage);
+            homeEventName = itemView.findViewById(R.id.name_label);
+            homeEventTime = itemView.findViewById(R.id.time_label);
+            homeEventDate = itemView.findViewById(R.id.date_label);
+            homeEventVenue = itemView.findViewById(R.id.venue_label);
 
 
         }
