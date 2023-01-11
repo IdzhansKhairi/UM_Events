@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment {
 
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Frame_Layout, new HomeOrganizerFragment());
+                fragmentTransaction.replace(R.id.Frame_Layout, new OrganizerAddFragment());
                 fragmentTransaction.commit();
 
             }
