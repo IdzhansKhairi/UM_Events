@@ -27,7 +27,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private Spinner credentials;
     private TextView viewUsername, viewPassword, viewCredentials;
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final  String Prefs_user = "LoginDesire";
+    public static String tag ;
+
+
 
 
     @Override
@@ -39,9 +41,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         username = findViewById(R.id.loginUsername);
         password =  findViewById(R.id.loginPassword);
         credentials =  findViewById(R.id.credentials_spinner);
-        SharedPreferences sw1 = getSharedPreferences(Prefs_user,MODE_PRIVATE);
-        String gg = sw1.getString("Desire", "");
-        System.out.println("HERE: "+ gg);
+
         checkLog();
 
         // This part is for the spinner
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                             if (dataSnapshot.child("username").getValue().toString().equals(username.getText().toString())){
                                 userExist = true;
                                 if (dataSnapshot.child("password").getValue().toString().equals(password.getText().toString())){
-                                    authenticationUser(username.getText().toString());
+                                    authenticationUser(dataSnapshot.child("desiredEvent").getValue().toString());
                                 }else
                                     Toast.makeText(getApplicationContext(),"Wrong Password",Toast.LENGTH_LONG).show();
                             }else{
@@ -133,22 +133,20 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
 
-    private void authenticationUser(String username){
+    private void authenticationUser(String desire){
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("User","true");
+        editor.putString("Desired",desire);
         editor.apply();
-        SharedPreferences SP2 = getSharedPreferences(Prefs_user,MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = SP2.edit();
-        editor2.putString("Desire",username);
-        editor2.apply();
         openHomePage();
     }
 
     private void checkLog(){
         SharedPreferences SP = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         String check = SP.getString("User","No");
+        tag = SP.getString("Desired","");
         if(check.equals("true")){
             Toast.makeText(getApplicationContext(),"Login Successfully",Toast.LENGTH_SHORT).show();
             openHomePage();

@@ -19,7 +19,6 @@ public class SettingsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final  String Prefs_user = "LoginDesire";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -70,10 +69,6 @@ public class SettingsFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        SharedPreferences sp2 = getActivity().getSharedPreferences(Prefs_user, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = sp2.edit();
-        editor2.clear();
-        editor2.apply();
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
         startActivity(loginIntent);
     }

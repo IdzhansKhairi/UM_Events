@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
 
     ArrayList<EventData> myEventData;
     HomeAdapter myEventAdapter;
+
     public static final  String Prefs_user = "LoginDesire";
 
 
@@ -48,8 +50,6 @@ public class HomeFragment extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
-        SharedPreferences sw1 = getActivity().getSharedPreferences(Prefs_user,Context.MODE_PRIVATE);
-        String username = sw1.getString("Desire", "");
 
 
 
@@ -85,7 +85,9 @@ public class HomeFragment extends Fragment {
                 //get data from database and insert into a new EventData object
                 for (DataSnapshot dataSnapshot :snapshot.getChildren() ){
                     EventData getData = dataSnapshot.getValue(EventData.class);
-                    myEventData.add(getData);
+                    if (getData.getEventCategory().contains(LoginActivity.tag)){
+                        myEventData.add(getData);
+                    }
                 }
                 myEventAdapter.notifyDataSetChanged();
             }
