@@ -6,9 +6,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 /**
@@ -58,6 +72,9 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    ArrayList<EventData> myEventData;
+    HomeAdapter myEventAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +85,56 @@ public class HomeFragment extends Fragment {
         if (nightMODE) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
+
+        ImageView organizerBtn;
+
+        organizerBtn = v.findViewById(R.id.HomeOragnizerBtn);
+
+        organizerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Frame_Layout, new HomeOrganizerFragment());
+                fragmentTransaction.commit();
+
+            }
+        });
+        
+//        Home recycler
+        RecyclerView recyclerView = v.findViewById(R.id.HomeOrganizerEventRecylerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        myEventData = new ArrayList<>();
+        myEventAdapter = new HomeAdapter(myEventData,getActivity());
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference database = db.getReference("Event_Node");
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //get data from database and insert into a new EventData object
+                for (DataSnapshot dataSnapshot :snapshot.getChildren() ){
+                    EventData getData = dataSnapshot.getValue(EventData.class);
+                    myEventData.add(getData);
+                }
+                myEventAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(error);
+            }
+        });
+        recyclerView.setAdapter(myEventAdapter);
+        myEventAdapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemCLick(int position) {
+//                myEventAdapter.get(position)
+            }
+        });
+
         return v;
     }}
 

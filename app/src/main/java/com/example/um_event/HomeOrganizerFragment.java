@@ -1,19 +1,18 @@
 package com.example.um_event;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.ImageButton;
-
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,10 +27,11 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
+public class HomeOrganizerFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,7 +41,7 @@ public class SearchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SearchFragment() {
+    public HomeOrganizerFragment() {
         // Required empty public constructor
     }
 
@@ -51,11 +51,11 @@ public class SearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
+     * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,50 +72,23 @@ public class SearchFragment extends Fragment {
         }
     }
 
-
     ArrayList<EventData> myEventData;
     EventAdapter myEventAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_search, container, false);
-        ImageButton searchBtn = v.findViewById(R.id.search_btn);
-        //this method will hide keyboard when user press the search button
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the input method manager
-                InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_home_organizer, container, false);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        boolean nightMODE = sharedPreferences.getBoolean("night", false); // Light mode is the default mode
+        if (nightMODE) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
 
-                // Check if the keyboard is showing
-                if (inputMethodManager.isAcceptingText()) {
-                    // Hide the keyboard
-                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-                }
-            }
-        });
-
-        EditText searchBar = v.findViewById(R.id.search_bar);
-        //implementing the search filter
-        searchBar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
-
-        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
+//      organizer recycler
+        RecyclerView recyclerView = v.findViewById(R.id.HomeOrganizerEventRecylerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -141,16 +114,21 @@ public class SearchFragment extends Fragment {
         });
         recyclerView.setAdapter(myEventAdapter);
 
-        return v;
-    }
 
-    public void filter(String in){
-        ArrayList<EventData> filteredList = new ArrayList<>();
-        for (EventData item : myEventData){
-            if (item.getEventName().toLowerCase().contains(in.toLowerCase())){
-            filteredList.add(item);
+        ImageView organizerAdd = v.findViewById(R.id.HomeOrgainzerAddBtn);
+
+        organizerAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Frame_Layout, new OrganizerAddFragment());
+                fragmentTransaction.commit();
+
             }
-        }
-        myEventAdapter.filterList(filteredList);
-    }
-}
+        });
+
+        return v;
+    }}
+

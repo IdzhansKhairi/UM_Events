@@ -1,6 +1,5 @@
 package com.example.um_event;
 
-import android.content.Intent;
 
 public class EventData {
 

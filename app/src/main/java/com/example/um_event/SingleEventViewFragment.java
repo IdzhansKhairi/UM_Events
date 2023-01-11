@@ -1,16 +1,28 @@
 package com.example.um_event;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class SingleEventViewFragment extends Fragment {
 
@@ -44,11 +56,92 @@ public class SingleEventViewFragment extends Fragment {
         }
     }
 
+    ArrayList<EventData> eventPageData;
+
+    TextView eventTitle, eventDesc, eventdate, eventtime, eventvenue,eventtag;
+    ImageView eventPic;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_event_view, container, false);
+        View v = inflater.inflate(R.layout.fragment_single_event_view, container, false);
+
+        String evtName = getArguments().getString("EventName");
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event_Node");
+
+        eventTitle = v.findViewById(R.id.EventTitle);
+        eventDesc = v.findViewById(R.id.eventDesc);
+        eventdate= v.findViewById(R.id.TVdate);
+        eventtime = v.findViewById(R.id.TVtime);
+        eventvenue = v.findViewById(R.id.TVlocation);
+        eventtag = v.findViewById(R.id.tag_list);
+        eventPic = v.findViewById(R.id.eventDisplayImg);
+        eventPageData = new ArrayList<>();
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if (dataSnapshot.child("eventName").getValue().toString().equals(evtName)){
+                        String eventName = dataSnapshot.child("eventName").getValue().toString();
+                        String eventDetail = dataSnapshot.child("eventDetail").getValue().toString();
+                        String eventVenue = dataSnapshot.child("eventVenue").getValue().toString();
+                        String eventTime = dataSnapshot.child("eventTime").getValue().toString();
+                        String eventDate = dataSnapshot.child("eventDate").getValue().toString();
+                        String eventCategory = dataSnapshot.child("eventCategory").getValue().toString();
+                        String eventImage = dataSnapshot.child("eventImage").getValue().toString();
+
+                        eventTitle.setText(eventName);
+                        eventDesc.setText(eventDetail);
+                        eventdate.setText(eventDate);
+                        eventtime.setText(eventTime);
+                        eventvenue.setText(eventVenue);
+                        eventtag.setText(eventCategory);
+                        eventPic.setImageBitmap(EventAdapter.convertImage(eventImage));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        for(int i = 0; i< desireArr.length; i++){
+//            if (desiredArr[i].equals())
+//        }
+        System.out.println(eventPageData.size());
+        //System.out.println("3. " + eventPageData.get(0).getEventName());
+        eventTitle.setTextColor(Color.parseColor("#ffffff"));
+        eventvenue.setTextColor(Color.parseColor("#252525"));
+        eventdate.setTextColor(Color.parseColor("#252525"));
+        eventtime.setTextColor(Color.parseColor("#252525"));
+
+        ImageButton backBtn = v.findViewById(R.id.eventViewBackBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.Frame_Layout,
+                        new SearchFragment()).addToBackStack(null).commit();
+            }
+        });
+
+        CheckBox fav = v.findViewById(R.id.checkBox);
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fav.isChecked())
+                fav.setButtonDrawable(R.drawable.ic_fav_clicked);
+                else
+                    fav.setButtonDrawable(R.drawable.selector_wishlist_item);
+            }
+        });
+        return v;
     }
 
     @Override
