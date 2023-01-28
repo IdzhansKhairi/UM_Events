@@ -45,11 +45,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         holder.homeEventName.setText(eventData.getEventName());
         holder.homeEventName.setTextColor(Color.parseColor("#222222"));
         holder.homeEventDate.setText(eventData.getEventDate());
-        holder.homeEventName.setTextColor(Color.parseColor("#222222"));
+        holder.homeEventDate.setTextColor(Color.parseColor("#222222"));
         holder.homeEventTime.setText(eventData.getEventTime());
-        holder.homeEventName.setTextColor(Color.parseColor("#222222"));
+        holder.homeEventTime.setTextColor(Color.parseColor("#222222"));
         holder.homeEventVenue.setText(eventData.getEventVenue());
-        holder.homeEventName.setTextColor(Color.parseColor("#222222"));
+        holder.homeEventVenue.setTextColor(Color.parseColor("#222222"));
         holder.homeEventImage.setImageBitmap(convertImage(eventData.getEventImage()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
