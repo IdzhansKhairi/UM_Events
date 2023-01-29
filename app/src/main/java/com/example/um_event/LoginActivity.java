@@ -86,14 +86,14 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                         }
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    System.out.println(error.getMessage());
                 }
-            });}else{
+            });}
+            else{
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference("Organizers_Credentials");
-                db.addValueEventListener(new ValueEventListener() {
+                ValueEventListener listener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         boolean userExist = false;
@@ -117,9 +117,12 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        System.out.println(error.getMessage());
                     }
-                });
+                };
+                db.addValueEventListener(listener);
+                db.removeEventListener(listener);
+                listener = null;
             }
         });
 

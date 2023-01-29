@@ -25,7 +25,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
 
     ArrayList<EventData> myEventData;
-    //EventData[] myEventData;
     FragmentActivity activity;
     //constructor
     public EventAdapter(ArrayList<EventData> myEventData, FragmentActivity activity) {

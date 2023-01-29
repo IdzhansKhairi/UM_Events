@@ -26,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText matricNumber, username, password, conPassword;
     private CheckBox sportsCheck, carnivalCheck, talksCheck, artsCheck, webinarCheck, showcaseCheck, educationalCheck;
     private String checks = "";
-    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +71,14 @@ public class RegisterActivity extends AppCompatActivity {
                                 !webinarCheck.isChecked() && !showcaseCheck.isChecked() && !educationalCheck.isChecked()){
                                 Toast.makeText(getApplicationContext(),"Please pick one category",Toast.LENGTH_LONG).show();
                         }else{
-
-                           // boolean isStudent = checkStudent(matricNo);
-                          // boolean registered = checkUser(matricNo);
-                          //  System.out.println("HERE : "+  registered);
-                          //  if(isStudent && !registered){
                             String matricNo = unifyMatricNo(matricNumber.getText().toString());
+//                            boolean isStudent = checkStudent(matricNo);
+//                            boolean registered = checkUser(matricNo);
+//                            System.out.println("HERE : "+  registered);
+//                            if(isStudent && !registered){
                                 InsertRegisterData(matricNo,username.getText().toString(),
                                         password.getText().toString(),Check());
-                           // }
+                            //}
                         }
                     }else {
                         Toast.makeText(getApplicationContext(),"Password doesn't match",Toast.LENGTH_LONG).show();
@@ -129,7 +127,12 @@ public class RegisterActivity extends AppCompatActivity {
         userNode.child(matricNo).setValue(insertUser).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(getApplicationContext(),"Successfully registered",Toast.LENGTH_LONG).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(),"Successfully registered",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),"Error registering",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         return true;
@@ -144,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
         final boolean[] exists = {false};
         String student = unifyMatricNo(matricNo);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Student_Info");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot Snapshot: snapshot.getChildren() ){
@@ -158,16 +161,19 @@ public class RegisterActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println(error.getMessage());
             }
-        });
+        };
+        ref.addListenerForSingleValueEvent(listener);
+        ref.removeEventListener(listener);
+        listener = null;
         return exists[0];
     }
 
     public boolean checkUser(String matricNo){
         final boolean[] exists = {false};
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users_Credentials");
-        ref.addValueEventListener(new ValueEventListener() {
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot Snapshot: snapshot.getChildren() ){
@@ -181,9 +187,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println(error.getMessage());
             }
-        });
+        };
+        ref.addValueEventListener(listener);
+        ref.removeEventListener(listener);
+        listener = null;
         System.out.println(exists[0]);
         return exists[0];
     }

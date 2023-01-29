@@ -2,20 +2,26 @@ package com.example.um_event;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,10 +54,6 @@ public class SettingClientFragment extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
         nightMODE = sharedPreferences.getBoolean("night", false); // Light mode is the default mode
 
-//       // if (nightMODE) {
-//            switcher.setChecked(true);
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//      //  }
 
         switcher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +91,7 @@ public class SettingClientFragment extends Fragment {
                         if (dataSnapshot.child("desiredEvent").getValue().toString().equals(desiredEvent)){
                             String matricNo = dataSnapshot.child("matricNumber").getValue().toString();
                             DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference().child("Student_Info").child(matricNo);
+
                             ref2.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,19 +102,16 @@ public class SettingClientFragment extends Fragment {
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
-
+                                    System.out.println(error.getMessage());
                                 }
                             });
-
-
-
                         }
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    System.out.println(error.getMessage());
                 }
             });
         }else {
@@ -131,9 +131,10 @@ public class SettingClientFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    System.out.println(error.getMessage());
                 }
             });
+
         }
 
 
@@ -164,8 +165,67 @@ public class SettingClientFragment extends Fragment {
             }
         });
 
+
+        //change password button
+        Button changePass = view.findViewById(R.id.changePasswordBtn);
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.password_change_dialog, null);
+                builder.setView(dialogView);
+
+                final EditText newPassword = dialogView.findViewById(R.id.currentPassword);
+                final EditText ConfirnnewPassword = dialogView.findViewById(R.id.newPassword);
+                Button changePasswordButton = dialogView.findViewById(R.id.changePasswordButton);
+                Button backDialog = dialogView.findViewById(R.id.backDialogBtn);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                backDialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                changePasswordButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String currentPasswordText = newPassword.getText().toString();
+                        String newPasswordText = ConfirnnewPassword.getText().toString();
+                        if (currentPasswordText.isEmpty() || newPasswordText.isEmpty()) {
+                            Toast.makeText(getActivity(), "Please enter both field.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users_Credentials").
+                                child(phone.getText().toString()).child("password");
+                        reference.setValue(newPasswordText).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity(),"Password changed successfully",Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    Toast.makeText(getActivity(),"Error changing password",Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                        dialog.dismiss();
+                    }
+                });
+
+
+            }
+        });
+
         return view;
     }
+
+
 
     public SettingClientFragment() {
         // Required empty public constructor
