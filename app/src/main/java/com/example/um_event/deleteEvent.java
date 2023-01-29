@@ -1,20 +1,15 @@
 package com.example.um_event;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,13 +19,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link deleteEvent#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeOrganizerFragment extends Fragment {
+public class deleteEvent extends Fragment {
+
+    ArrayList<EventData> myEventData;
+    DeleteAdapter mydeleteAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +38,7 @@ public class HomeOrganizerFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HomeOrganizerFragment() {
+    public deleteEvent() {
         // Required empty public constructor
     }
 
@@ -51,11 +48,11 @@ public class HomeOrganizerFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment deleteEvent.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static deleteEvent newInstance(String param1, String param2) {
+        deleteEvent fragment = new deleteEvent();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,32 +69,20 @@ public class HomeOrganizerFragment extends Fragment {
         }
     }
 
-    ArrayList<EventData> myEventData;
-    EventAdapter myEventAdapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home_organizer, container, false);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
-        boolean nightMODE = sharedPreferences.getBoolean("night", false); // Light mode is the default mode
-        if (nightMODE) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
-
-//        filter
+        View v = inflater.inflate(R.layout.fragment_delete_event, container, false);
 
 
 
-//      organizer recycler
-        RecyclerView recyclerView = v.findViewById(R.id.HomeOrganizerEventRecylerview2);
+        RecyclerView recyclerView = v.findViewById(R.id.deleteFragmentRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         myEventData = new ArrayList<>();
-        myEventAdapter = new EventAdapter(myEventData,getActivity());
+        mydeleteAdapter = new DeleteAdapter(myEventData,getActivity());
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference database = db.getReference("Event_Node");
@@ -107,49 +92,18 @@ public class HomeOrganizerFragment extends Fragment {
                 //get data from database and insert into a new EventData object
                 for (DataSnapshot dataSnapshot :snapshot.getChildren() ){
                     EventData getData = dataSnapshot.getValue(EventData.class);
-                    myEventData.add(getData);
+                        myEventData.add(getData);
+
                 }
-                myEventAdapter.notifyDataSetChanged();
+                mydeleteAdapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 System.out.println(error);
             }
         });
-        recyclerView.setAdapter(myEventAdapter);
-
-
-        ImageView organizerAdd = v.findViewById(R.id.HomeOrgainzerAddBtn);
-
-        organizerAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Frame_Layout, new ManageEvent());
-                fragmentTransaction.commit();
-
-            }
-        });
-
-        ImageView backBtn = v.findViewById(R.id.BackBtn);
-
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Frame_Layout, new HomeFragment());
-                fragmentTransaction.commit();
-
-            }
-        });
+        recyclerView.setAdapter(mydeleteAdapter);
 
         return v;
     }
-
-
 }
-

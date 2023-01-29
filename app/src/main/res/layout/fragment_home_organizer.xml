@@ -11,7 +11,7 @@
         layout="@layout/home_organizer_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/HomeOrganizerEventRecylerview"
+        android:id="@+id/HomeOrganizerEventRecylerview2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
