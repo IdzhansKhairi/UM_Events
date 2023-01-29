@@ -69,7 +69,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.ViewHolder
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Are you sure you want to delete this content?");
+                builder.setMessage("Are you sure you want to delete this event?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked the "Yes" button, so delete the node.
